@@ -39,10 +39,15 @@ Features:
 
 Included Difficulty Sets:
 
-   Scaled					Evolution Series
- Hazard 4x2						Evo I
- Hazard 5x2						Evo II
- Hazard 6x2						Evo III
+   Scaled
+ Hazard 4x2						
+ Hazard 5x2						
+ Hazard 6x2						
  Hazard 7x2
  Hazard 8x2
  Hazard 9x2
+
+  Evolution Series
+ Evolution I
+ Evolution II
+ Evolution III

@@ -1,11 +1,11 @@
 {
-	"Name": "Biomes Evolution",		
+	"Name": "Biomes Evolution",
 	"Description": "
 	 ____________________________________________________________________________________________
 	|                                                                                            |
 	|                                A Biome Specific Difficulty                                 |
 	|                                        By Xanthus                                          |
-	|                                     - Version b138 -                                       |
+	|                                     - Version b142 -                                       |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
 	|                                Weapon Damage Scaling [%]:                                  |
@@ -18,7 +18,7 @@
 	|  Corr:  |   + 10    |    + 10    |    + 10    |    - 20    |    + 10    |    + 10          |
 	|  Elec:  |   - 20    |    - 70    |    - 70    |    ----    |    ----    |    ----          |
 	|  Expl:  |   - 20    |    + 10    |    ----    |    - 20    |    + 10    |    - 20          |
-	|  Fire:  |   + 10    |    ----    |    - 20    |    + 10    |    ----    |    + 10          |
+	|  Fire:  |   + 10    |    ----    |    - 20    |    + 10    |    - 20    |    + 10          |
 	|  Kine:  |   + 10    |    - 20    |    + 10    |    + 10    |    - 20    |    ----          |
 	|  Phys:  |   ----    |    + 10    |    ----    |    ----    |    ----    |    ----          |
 	|  Pier:  |   ----    |    - 20    |    ----    |    ----    |    ----    |    ----          |
@@ -30,7 +30,7 @@
 	|         |   Magma   |   Ossuary/ | Radioactive|    Salt    | Sandblasted|  Sabotage        |
 	|         |   Caves   |   Shallow  |  Exclusion |    Caves   |  Corridors |                  |
 	|_________|___________|____________|____________|____________|____________|__________________|
-	|  Cold:  |   + 10    |    ----    |    + 10    |    ----    |    + 10    |    ----          |
+	|  Cold:  |   - 20    |    ----    |    + 10    |    ----    |    + 10    |    ----          |
 	|  Corr:  |   ----    |    + 10    |    - 20    |    ----    |    ----    |    ----          |
 	|  Elec:  |   ----    |    ----    |    + 10    |    ----    |    ----    |    + 10          |
 	|  Expl:  |   + 10    |    + 10    |    ----    |    + 10    |    + 10    |    ----          |
@@ -64,15 +64,35 @@
 	|                                                                                            |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
-	|  How to use:                                                                               |
-	|    Go to Vars-section under -> BaseDifficultySelection -> Value                            |
-	|    -> Fill difficulty's name from the list in quotation marks.                             |
+	|  To select the difficulty / turn resistances on or off:                                    |
+	|                                                                                            |
+	|    -> BaseDifficultySelection -> 'Value' -> Type in Difficulty from the List above         |
+	|                                           'Hazard #' or 'Evo I', 'Evo II', 'Evo III'       |
+	|                                                                                            |
+	|    -> Resistance_Switch       -> 'Value' -> type in 'on' or 'off'                          |
 	|____________________________________________________________________________________________|
+	            |    |
+	            |    |
+	            |    |
+	            |    |
+	            |    |
+	        ____|    |____
+            \            /
+             \          /
+              \        /
+               \      /
+                \    /
+                 \  /
+                  \/
 	",
 	"Vars": {
 		"BaseDifficultySelection": {
 			"Type": "String",
 			"Value": "Hazard 6"
+		},
+		"Resistance_Switch": {
+			"Type": "String",
+			"Value": "On"			
 		},
 		"Bulk2ndPhase_Movement": {
 			"Type": "Float",
@@ -166,9 +186,9 @@
 					"Var": "BaseDifficultySelection"
 				},
 				"Default": 0.8,
-				"Evo I": 0.75,
-				"Evo II": 0.75,
-				"Evo III": 0.75
+				"Evo I": 0.7,
+				"Evo II": 0.7,
+				"Evo III": 0.7
 			}
 		},
 		"CustomVeterans_Tank_X": {
@@ -192,9 +212,22 @@
 					"Var": "BaseDifficultySelection"
 				},
 				"Default": 0.2,
-				"Evo I": 0.15,
-				"Evo II": 0.15,
-				"Evo III": 0.15
+				"Evo I": 0.18,
+				"Evo II": 0.18,
+				"Evo III": 0.18
+			}
+		},		
+		"CustomVeterans_ShieldTank_X": {
+			"Type": "Float",
+			"Value": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "BaseDifficultySelection"
+				},
+				"Default": 0,
+				"Evo I": 0.02,
+				"Evo II": 0.02,
+				"Evo III": 0.02
 			}
 		},		
 		"CustomVeterans_RapidShooter": {
@@ -266,6 +299,23 @@
 				"Evo III": 400
 			}		
 		},
+		"DifficultyRating_Bulk_Small": {
+			"Type": "Float",
+			"Value": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "BaseDifficultySelection"
+				},
+				"Default": 100,
+				"Hazard 6": 100,
+				"Hazard 7": 120,
+				"Hazard 8": 140,
+				"Hazard 9": 160,
+				"Evo I": 150,
+				"Evo II": 180,
+				"Evo III": 210
+			}		
+		},		
 		"DifficultyRating_Dread": {
 			"Type": "Float",
 			"Value": {
@@ -762,127 +812,208 @@
 		"Resistance_Cold": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 0.8,
-				"CrystalCaves": 1,
-				"DenseBiozone": 1,
-				"FungusBogs": 1,
-				"IceCaves": 0.3,
-				"HollowBough": 0.8,
-				"MagmaCaves": 1.1,
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
 				"Default": 1,
-				"RadioactiveExclusionZone": 1.1,
-				"SaltCaves": 1,
-				"SandblastedCorridors": 1.1
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"AzureWeald": 0.8,
+					"CrystalCaves": 1,
+					"DenseBiozone": 1,
+					"FungusBogs": 1,
+					"IceCaves": 0.3,
+					"HollowBough": 0.8,
+					"MagmaCaves": 0.8,
+					"Default": 1,
+					"RadioactiveExclusionZone": 1.1,
+					"SaltCaves": 1,
+					"SandblastedCorridors": 1.1
+				}
 			}
 		},		
 		"Resistance_Corrosive": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 1.1,
-				"CrystalCaves": 1.1,
-				"DenseBiozone": 1.1,
-				"FungusBogs": 0.8,
-				"IceCaves": 1.1,
-				"HollowBough": 1.1,
-				"MagmaCaves": 1,
-				"Default": 1.1,
-				"RadioactiveExclusionZone": 0.8,
-				"SaltCaves": 1,
-				"SandblastedCorridors": 1
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"AzureWeald": 1.1,
+					"CrystalCaves": 1.1,
+					"DenseBiozone": 1.1,
+					"FungusBogs": 0.8,
+					"IceCaves": 1.1,
+					"HollowBough": 1.1,
+					"MagmaCaves": 1,
+					"Default": 1.1,
+					"RadioactiveExclusionZone": 0.8,
+					"SaltCaves": 1,
+					"SandblastedCorridors": 1
+				}
 			}
 		},
 		"Resistance_Electric": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 1.1,
-				"Default": {
-					"Mutate": "ByBiome",
-					"AzureWeald": 0.8,
-					"CrystalCaves": 0.3,
-					"DenseBiozone": 0.3,
-					"FungusBogs": 1,
-					"IceCaves": 1,
-					"HollowBough": 1,
-					"MagmaCaves": 1,
-					"Default": 1,
-					"RadioactiveExclusionZone": 1.1,
-					"SaltCaves": 1,
-					"SandblastedCorridors": 1
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 1.1,
+					"Default": {
+						"Mutate": "ByBiome",
+						"AzureWeald": 0.8,
+						"CrystalCaves": 0.3,
+						"DenseBiozone": 0.3,
+						"FungusBogs": 1,
+						"IceCaves": 1,
+						"HollowBough": 1,
+						"MagmaCaves": 1,
+						"Default": 1,
+						"RadioactiveExclusionZone": 1.1,
+						"SaltCaves": 1,
+						"SandblastedCorridors": 1
+					}
 				}
 			}
 		},
 		"Resistance_Explosion": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 0.8,
-					"CrystalCaves": 1.1,
-					"DenseBiozone": 1,
-					"FungusBogs": 0.8,
-					"IceCaves": 1.1,
-					"HollowBough": 0.8,
-					"MagmaCaves": 1.1,
-					"Default": 1.1,
-					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 1.1,
-					"SandblastedCorridors": 1.1
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 0.8,
+						"CrystalCaves": 1.1,
+						"DenseBiozone": 1,
+						"FungusBogs": 0.8,
+						"IceCaves": 1.1,
+						"HollowBough": 0.8,
+						"MagmaCaves": 1.1,
+						"Default": 1.1,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 1.1,
+						"SandblastedCorridors": 1.1
+					}
 				}
 			}
 		},
 		"Resistance_Fire": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 0.8,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 1.1,
-					"CrystalCaves": 1,
-					"DenseBiozone": 0.8,
-					"FungusBogs": 1.1,
-					"IceCaves": 1,
-					"HollowBough": 1.1,
-					"MagmaCaves": 0.3,
-					"Default": 0.8,
-					"RadioactiveExclusionZone": 0.8,
-					"SaltCaves": 0.8,
-					"SandblastedCorridors": 0.8	
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 0.8,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1.1,
+						"CrystalCaves": 1,
+						"DenseBiozone": 0.8,
+						"FungusBogs": 1.1,
+						"IceCaves": 0.8,
+						"HollowBough": 1.1,
+						"MagmaCaves": 0.3,
+						"Default": 0.8,
+						"RadioactiveExclusionZone": 0.8,
+						"SaltCaves": 0.8,
+						"SandblastedCorridors": 0.8	
+					}
 				}
 			}
 		},
 		"Resistance_Kinetic": {
 			"Type": "Float",
 			"Value": {
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
 				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 1.1,
-					"CrystalCaves": 0.8,
-					"DenseBiozone": 1.1,
-					"FungusBogs": 1.1,
-					"IceCaves": 0.8,
-					"HollowBough": 1,
-					"MagmaCaves": 0.8,
-					"Default": 0.8,
-					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 0.8,
-					"SandblastedCorridors": 0.8
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1.1,
+						"CrystalCaves": 0.8,
+						"DenseBiozone": 1.1,
+						"FungusBogs": 1.1,
+						"IceCaves": 0.8,
+						"HollowBough": 1,
+						"MagmaCaves": 0.8,
+						"Default": 0.8,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 0.8,
+						"SandblastedCorridors": 0.8
+					}
 				}
 			}
 		},
 		"Resistance_Physical": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1,
+						"CrystalCaves": 1.1,
+						"DenseBiozone": 1,
+						"FungusBogs": 1,
+						"IceCaves": 1,
+						"HollowBough": 1,
+						"MagmaCaves": 1.1,
+						"Default": 1,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 1.1,
+						"SandblastedCorridors": 1
+					}
+				}
+			}
+		},
+		"Resistance_Piercing": {
+			"Type": "Float",
+			"Value": {
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
 					"Mutate": "ByBiome",
 					"AzureWeald": 1,
 					"CrystalCaves": 1.1,
@@ -890,46 +1021,49 @@
 					"FungusBogs": 1,
 					"IceCaves": 1,
 					"HollowBough": 1,
-					"MagmaCaves": 1.1,
+					"MagmaCaves": 0.8,
 					"Default": 1,
 					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 1.1,
-					"SandblastedCorridors": 1
+					"SaltCaves": 0.8,
+					"SandblastedCorridors":	0.8
 				}
-			}
-		},
-		"Resistance_Piercing": {
-			"Type": "Float",
-			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 1,
-				"CrystalCaves": 1.1,
-				"DenseBiozone": 1,
-				"FungusBogs": 1,
-				"IceCaves": 1,
-				"HollowBough": 1,
-				"MagmaCaves": 0.8,
-				"Default": 1,
-				"RadioactiveExclusionZone": 1,
-				"SaltCaves": 0.8,
-				"SandblastedCorridors":	0.8
 			}
 		},
 		"Resistance_Poison": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
 				"Default": 1,
-				"FungusBogs": 0,
-				"HollowBough": 0
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 0,
+					"Default": {					
+						"Mutate": "ByBiome",
+						"Default": 1,
+						"FungusBogs": 0,
+						"HollowBough": 0
+					}
+				}
 			}
 		},
 		"Resistance_Radiation": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Resistance_Switch"
+				},
 				"Default": 1,
-				"RadioactiveExclusionZone": 0
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"Default": 1,
+					"RadioactiveExclusionZone": 0
+				}
 			}
 		},
 		"SpawnAmountModifier_Woodlouse": {
@@ -1220,7 +1354,7 @@
 						],
 						"CrystalCaves": [
 							"ED_Biome_Spider_Grunt",
-							"ED_Bomber_Explosive_Electro",
+							"ED_Biomes_Bomber_Electric",
 							"ED_Biome_Mactera_Shooter_Amber",
 							"ED_Grabber",
 							"ED_Spider_Buffer",
@@ -1245,7 +1379,7 @@
 						],
 						"DenseBiozone": [
 							"ED_Biome_Spider_Grunt",
-							"ED_Bomber_Explosive_Electro",
+							"ED_Biomes_Bomber_Electric",
 							"ED_Biome_Mactera_Shooter_Normal",
 							"ED_Grabber",
 							"ED_Jelly_Swarmer",
@@ -4152,6 +4286,7 @@
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
 					"Default": -320,
+					"MagmaCaves": -225,
 					"IceCaves": {					
 						"Var": "Temperature_Freeze_Normal"
 					}
@@ -4164,47 +4299,13 @@
 				}
 			}			
 		},
-		"ED_Bomber_Explosive_Electro": {
-			"AttackDamageMultiplier": 0.3,
-			"Base": "ED_Bomber_Explosive",
+		"ED_Biomes_Bomber_Electric": {
 			"CanBeUsedForConstantPressure": true,
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 95,
 			"DisplayName": "Electro Bomber",
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [
-					"M_Flier_Bomber_Exploder_Body",
-					"M_Flier_Bomber_Exploder_Sacks",
-					"M_Flier_Bomber_Exploder_Wings",
-					"M_Flier_Bomber_Exploder_Hard",
-					"M_Flier_Bomber_Exploder_Head"
-				],
-				"AzureWeald": [
-					"M_Biome_AzureWeald_Leaf_2",
-					"M_Biome_Azure_MagicRock_Particles",
-					"M_Biome_AzureWeald_Leaf_2",
-					"M_Biome_AzureWeald_Leaf_2",
-					"M_Spider_RapidShooter_WeakPoint"
-				],
-				"CrystalCaves": [
-					"M_AmberEnemy_Flesh",
-					"M_ElecBulkArmor",
-					"",
-					"M_AmberEnemy_Armor",
-					"M_AmberEnemy_Armor"
-				],
-				"DenseBiozone": [
-					"M_AmberEnemy_Flesh",
-					"M_ElecBulkArmor",
-					"",
-					"M_AmberEnemy_Armor",
-					"M_AmberEnemy_Armor"					
-				]
-			},
 			"MaxSpawnCount": 1,
 			"MinSpawnCount": 1,
-			"Projectile": "PRJ_WoodlouseAttack_electric",
 			"Rarity": 8,
 			"Resistances": {
 				"ColdDamageMultiplier": {
@@ -4314,6 +4415,7 @@
 			"Scale": 0
 		},
 		"ED_Bomber_Radioactive": {
+			"AttackDamageMultiplier": 0.75,
 			"Base": "ED_Bomber",
 			"CanBeUsedInEncounters": true,
 			"CustomVeterans": {
@@ -4405,6 +4507,7 @@
 			"SpawnAmountModifier": 0.5
 		},
 		"ED_Bomber_Radioactive_2": {
+			"AttackDamageMultiplier": 0.75,
 			"Base": "ED_Bomber",
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 95,
@@ -4490,6 +4593,7 @@
 			"SpawnAmountModifier": 0.5			
 		},		
 		"ED_Bomber_Radioactive_3": {
+			"AttackDamageMultiplier": 0.75,
 			"Base": "ED_Bomber",
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 95,
@@ -4575,6 +4679,7 @@
 			"SpawnAmountModifier": 0.5			
 		},		
 		"ED_Bomber_Radioactive_4": {
+			"AttackDamageMultiplier": 0.75,
 			"Base": "ED_Bomber",
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 95,
@@ -6304,23 +6409,13 @@
 			"Base": "ED_Mactera_Shooter_HeavyVeteran",
 			"DifficultyRating": 45,
 			"DisplayName": "Twilight Mactera",
-			"Heal": {
-				"Mutate": "IfFloat",
-				"Value": {
-					"Mutate": "EnemyDistance",
-					"ED": "ED_Mactera_Shooter_Phantom"
-				},
-				">=": 8000,
-				"Then": -10000,
-				"Else": 0
-			},
 			"HealthRaw": 300,
 			"Materials": [
 				"M_Plague_Projectile_Wobble",
 				"M_Greybox_Light_YellowX20",
 				"M_CaveHolo_Transition"
 			],
-			"MaxSpawnCount": 2,
+			"MaxSpawnCount": 1,
 			"MinSpawnCount": 1,
 			"Projectile": "PRJ_NormalBlasterShot",
 			"Spawner": {
@@ -6328,7 +6423,7 @@
 				"MaxSpawns": 5,
 				"OnDeathKillSpawns": true,
 				"OnSpawnCount": 5,
-				"IntervalSpawnCount": 5
+				"IntervalSpawnCount": 3
 			},
 			"Rarity": 6,
 			"Resistances": {
@@ -6368,7 +6463,6 @@
 			"SpawnAmountModifier": 0.5
 		},
 		"ED_Mactera_Shooter_Duplicate": {
-			"AttackDamageMultiplier": 0.2,
 			"Base": "ED_Biomes_Mactera_Shooter_Ghost",
 			"DisplayName": "Ghost",
 			"Heal": {
@@ -6576,8 +6670,8 @@
 				"Default": [],
 				"CrystalCaves": [
 					"M_Spider_Hoarder_Body02",
-					"M_Biome_CrystalCaves_Crystal03_Terrain",
-					"M_Biome_CrystalCaves_Crystal03_Terrain"
+					"",
+					""
 				],
 				"DenseBiozone": [
 					"M_LushDownpour_CoralTongue",
@@ -6628,8 +6722,8 @@
 				"Default": [],
 				"CrystalCaves": [
 					"M_Spider_Hoarder_Body02",
-					"M_Biome_CrystalCaves_Crystal03_Terrain",
-					"M_Biome_CrystalCaves_Crystal03_Terrain"
+					"",
+					""
 				],
 				"DenseBiozone": [
 					"M_LushDownpour_CoralTongue",
@@ -6672,452 +6766,6 @@
 			},
 			"Scale": 1.2,
 			"SpawnAmountModifier": 0.1
-		},
-		"ED_ShootingPlant_Ice": {
-			"Base": "ED_ShootingPlant",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Icefang Infector",
-			"Materials": [
-				"M_Spider_Tank_Armor_Ice",
-				"M_Flier_BomberIce_Flesh",
-				"M_Flier_BomberIce_Flesh"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Ice",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Temperature": {
-				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
-				},
-				"BurnTemperature": {
-					"Mutate": "ByBiome",
-					"Default": 30,
-					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
-					}
-				},				
-				"FreezeTemperature": {
-					"Mutate": "ByBiome",
-					"Default": -50,
-					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
-					}
-				},
-				"DieIfBurning": {
-					"Var": "Temperature_BurnDie"
-				},				
-				"DieIfFrozen": {
-					"Var": "Temperature_FreezeDie"
-				}
-			}			
-		},		
-		"ED_ShootingPlant_Ice_X": {
-			"Base": "ED_ShootingPlant_NukeSpread",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Evolved Icefang Infector",
-			"Materials": [
-				"M_Spider_Tank_Armor_Ice",
-				"M_Flier_BomberIce_Flesh",
-				"M_Flier_BomberIce_Flesh"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Ice",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 1.2,
-			"SpawnAmountModifier": 0.1,
-			"Temperature": {
-				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
-				},
-				"BurnTemperature": {
-					"Mutate": "ByBiome",
-					"Default": 30,
-					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
-					}
-				},				
-				"FreezeTemperature": {
-					"Mutate": "ByBiome",
-					"Default": -50,
-					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
-					}
-				},
-				"DieIfBurning": {
-					"Var": "Temperature_BurnDie"
-				},				
-				"DieIfFrozen": {
-					"Var": "Temperature_FreezeDie"
-				}
-			}			
-		},
-		"ED_ShootingPlant_Laser": {
-			"Base": "ED_ShootingPlant",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Laserballer",
-			"Materials": [
-				"M_Spider_Grunt_Armor_Radioactive",
-				"M_SentryOverchargeProjectile",
-				"M_SentryOverchargeProjectile"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			}
-		},		
-		"ED_ShootingPlant_Laser_X": {
-			"Base": "ED_ShootingPlant_NukeSpread",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Evolved Laserballer",
-			"Materials": [
-				"M_Spider_Grunt_Armor_Radioactive",
-				"M_SentryOverchargeProjectile",
-				"M_SentryOverchargeProjectile"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 1.2,
-			"SpawnAmountModifier": 0.1
-		},
-		"ED_ShootingPlant_Poison": {
-			"Base": "ED_ShootingPlant",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Blightballer",
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Roots"
-				],
-				"HollowBough": [
-					"M_StabberVine_Tell"
-				]
-			},
-			"Projectile": "PRJ_Biomes_ShootingPlant_Poison",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			}			
-		},		
-		"ED_ShootingPlant_Poison_X": {
-			"Base": "ED_ShootingPlant_NukeSpread",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Evolved Blightballer",
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Roots"
-				],
-				"HollowBough": [
-					"M_StabberVine_Tell"
-				]
-			},
-			"Projectile": "PRJ_Biomes_ShootingPlant_Poison",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 1.2			
-		},
-		"ED_ShootingPlant_Rock": {
-			"Base": "ED_ShootingPlant",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Rockballer",
-			"Materials": [
-				"M_Spider_Lobber_GlowBubbles"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Rock",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Temperature": {
-				"BurnTemperature": 1000,
-				"CoolingRate": 8,
-				"DouseFireTemperature": 300,
-				"FreezeTemperature": -50,
-				"UnfreezeTemperature": 0,
-				"WarmingRate": 8
-			}			
-		},		
-		"ED_ShootingPlant_Rock_X": {
-			"Base": "ED_ShootingPlant_NukeSpread",
-			"CanBeUsedInEncounters": true,
-			"DisplayName": "Evolved Rockballer",
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [
-					"M_Spider_Lobber_GlowBubbles"
-				],
-				"AzureWeald": [],
-				"CrystalCaves": [
-					"M_Spider_Hoarder_Body02",
-					"M_Biome_CrystalCaves_Crystal03_Terrain",
-					"M_Biome_CrystalCaves_Crystal03_Terrain"
-				],
-				"DenseBiozone": [],
-				"FungusBogs": [],
-				"HollowBough": [],
-				"IceCaves": [],
-				"MagmaCaves": [
-					"M_Spider_Lobber_GlowBubbles"
-				],
-				"RadioactiveExclusionZone": [],
-				"SandblastedCorridors": [
-					"M_Spider_Lobber_GlowBubbles"
-				],
-				"SaltCaves": [
-					"M_Spider_Lobber_GlowBubbles"
-				]
-			},
-			"Projectile": "PRJ_Biomes_ShootingPlant_Rock",
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 1.2,
-			"SpawnAmountModifier": 0.1,
-			"Temperature": {
-				"BurnTemperature": 1000,
-				"CoolingRate": 8,
-				"DouseFireTemperature": 300,
-				"FreezeTemperature": -50,
-				"UnfreezeTemperature": 0,
-				"WarmingRate": 8
-			}			
 		},
 		"ED_ShootingPlant_Fire": {
 			"Base": "ED_ShootingPlant",
@@ -7256,6 +6904,429 @@
 					"Var": "Temperature_FreezeDie"
 				}
 			}			
+		},
+		"ED_ShootingPlant_Ice": {
+			"Base": "ED_Biomes_ShootingPlant_Ice",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Icefang Infector",
+			"Materials": [
+				"M_Spider_Tank_Armor_Ice",
+				"M_Flier_BomberIce_Flesh",
+				"M_Flier_BomberIce_Flesh"
+			],
+			"Projectile": "PRJ_Biomes_ShootingPlant_Ice",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 30,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -50,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
+		},		
+		"ED_ShootingPlant_Ice_X": {
+			"Base": "ED_ShootingPlant_NukeSpread",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Evolved Icefang Infector",
+			"Materials": [
+				"M_Spider_Tank_Armor_Ice",
+				"M_Flier_BomberIce_Flesh",
+				"M_Flier_BomberIce_Flesh"
+			],
+			"Projectile": "PRJ_Biomes_ShootingPlant_Ice",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 1.2,
+			"SpawnAmountModifier": 0.1,
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 30,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -50,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
+		},
+		"ED_ShootingPlant_Laser": {
+			"Base": "ED_Biomes_ShootingPlant_Laser",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Laserballer",
+			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			}
+		},		
+		"ED_ShootingPlant_Laser_X": {
+			"Base": "ED_ShootingPlant_NukeSpread",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Evolved Laserballer",
+			"Materials": [
+				"M_Spider_Grunt_Armor_Radioactive",
+				"M_SentryOverchargeProjectile",
+				"M_SentryOverchargeProjectile"
+			],
+			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 1.2,
+			"SpawnAmountModifier": 0.1
+		},
+		"ED_ShootingPlant_Poison": {
+			"Base": "ED_Biomes_ShootingPlant_Poison",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Blightballer",
+			"Materials": {
+				"Mutate": "ByBiome",
+				"Default": [],
+				"FungusBogs": [
+					"M_Hydra_Weed_Heart_Roots"
+				],
+				"HollowBough": [
+					"M_StabberVine_Tell"
+				]
+			},
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			}			
+		},		
+		"ED_ShootingPlant_Poison_X": {
+			"Base": "ED_ShootingPlant_NukeSpread",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Evolved Blightballer",
+			"Materials": {
+				"Mutate": "ByBiome",
+				"Default": [],
+				"FungusBogs": [
+					"M_Hydra_Weed_Heart_Roots"
+				],
+				"HollowBough": [
+					"M_StabberVine_Tell"
+				]
+			},
+			"Projectile": "PRJ_Biomes_ShootingPlant_Poison",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 1.2			
+		},
+		"ED_ShootingPlant_Rock": {
+			"Base": "ED_ShootingPlant",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Rockballer",
+			"Materials": [
+				"M_Spider_Lobber_GlowBubbles"
+			],
+			"Projectile": "PRJ_Biomes_ShootingPlant_Rock",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			}			
+		},		
+		"ED_ShootingPlant_Rock_X": {
+			"Base": "ED_ShootingPlant_NukeSpread",
+			"CanBeUsedInEncounters": true,
+			"DisplayName": "Evolved Rockballer",
+			"Materials": {
+				"Mutate": "ByBiome",
+				"Default": [
+					"M_Spider_Lobber_GlowBubbles"
+				],
+				"AzureWeald": [],
+				"CrystalCaves": [
+					"M_Spider_Hoarder_Body02",
+					"M_Biome_CrystalCaves_Crystal03_Terrain",
+					"M_Biome_CrystalCaves_Crystal03_Terrain"
+				],
+				"DenseBiozone": [],
+				"FungusBogs": [],
+				"HollowBough": [],
+				"IceCaves": [],
+				"MagmaCaves": [
+					"M_Spider_Lobber_GlowBubbles"
+				],
+				"RadioactiveExclusionZone": [],
+				"SandblastedCorridors": [
+					"M_Spider_Lobber_GlowBubbles"
+				],
+				"SaltCaves": [
+					"M_Spider_Lobber_GlowBubbles"
+				]
+			},
+			"Projectile": "PRJ_Biomes_ShootingPlant_Rock",
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 1.2		
 		},
 		"ED_ShootingPlant_Void": {
 			"Base": "ED_ShootingPlant",
@@ -7578,10 +7649,10 @@
 			"Projectile": {
 				"Mutate": "ByBiome",
 				"Default": "PRJ_Spider_Boss_Heavy_FireballBallistics_C",
-				"AzureWeald": "PRJ_WoodlouseAttack",
+				"AzureWeald": "PRJ_Biomes_WoodlouseAttack_Void",
 				"CrystalCaves": "PRJ_StaticBomber",
-				"FungusBogs": "PRJ_WoodlouseAttack_poison",
-				"HollowBough": "PRJ_WoodlouseAttack_poison",
+				"FungusBogs": "PRJ_Biomes_WoodlouseAttack_poison",
+				"HollowBough": "PRJ_Biomes_WoodlouseAttack_poison",
 				"IceCaves": "PRJ_Crye_SnowBall_C",
 				"RadioactiveExclusionZone": "PRJ_Nukebomber_Bomb",
 				"SaltCaves": "PRJ_StaticBomber"
@@ -7694,13 +7765,13 @@
 						0.5
 					]
 				},
-				"CrystalCaves": "PRJ_WoodlouseAttack_electric",
-				"DenseBiozone": "PRJ_WoodlouseAttack_electric",
-				"FungusBogs": "PRJ_WoodlouseAttack",
+				"CrystalCaves": "PRJ_Biomes_WoodlouseAttack_Electric",
+				"DenseBiozone": "PRJ_Biomes_WoodlouseAttack_Electric",
+				"FungusBogs": "PRJ_Biomes_WoodlouseAttack_Poison",
 				"IceCaves": {
 					"Mutate": "RandomChoice",
 					"Choices": [
-						"PRJ_WoodlouseAttack_Ice",
+						"PRJ_Biomes_WoodlouseAttack_Ice",
 						"PRJ_Crye_SnowBall_C"
 					],
 					"Weights": [
@@ -7890,7 +7961,7 @@
 				"DouseFireTemperature": 50
 			}
 		},
-		"ED_Spider_Boss_TwinA_WoodlouseAttack_electric": {
+		"ED_Spider_Boss_TwinA_WoodlouseAttack_Electric": {
 			"AttackDamageMultiplier": 0.6,
 			"Base": "ED_Spider_Boss_TwinA",
 			"CanBeUsedForConstantPressure": true,
@@ -7918,7 +7989,7 @@
 			},
 			"MaxSpawnCount": 1,
 			"MinSpawnCount": 1,
-			"Projectile": "PRJ_WoodlouseAttack_electric",
+			"Projectile": "PRJ_Biomes_WoodlouseAttack_Electric",
 			"Rarity": {
 				"Var": "Rarity_Dreads"
 			},
@@ -7937,7 +8008,7 @@
 				"DouseFireTemperature": 50
 			}
 		},
-		"ED_Spider_Boss_TwinA_WoodlouseAttack_ice": {
+		"ED_Spider_Boss_TwinA_WoodlouseAttack_Ice": {
 			"AttackDamageMultiplier": 0.6,
 			"Base": "ED_Spider_Boss_TwinA",
 			"CanBeUsedForConstantPressure": true,
@@ -7954,7 +8025,7 @@
 				"M_Spider_Tank_Body_Ice"
 			],
 			"MaxSpawnCount": 1,
-			"Projectile": "PRJ_WoodlouseAttack_ice_C",
+			"Projectile": "PRJ_Biomes_WoodlouseAttack_Ice",
 			"Rarity": {
 				"Var": "Rarity_Dreads"
 			},
@@ -7995,7 +8066,7 @@
 				}
 			}
 		},
-		"ED_Spider_Boss_TwinA_WoodlouseAttack_poison": {
+		"ED_Spider_Boss_TwinA_WoodlouseAttack_Poison": {
 			"AttackDamageMultiplier": 0.6,
 			"Base": "ED_Spider_Boss_TwinA",
 			"CanBeUsedForConstantPressure": true,
@@ -8013,7 +8084,7 @@
 			],
 			"MaxSpawnCount": 1,
 			"MinSpawnCount": 1,
-			"Projectile": "PRJ_WoodlouseAttack_poison",
+			"Projectile": "PRJ_Biomes_WoodlouseAttack_Poison",
 			"Rarity": {
 				"Var": "Rarity_Dreads"
 			},
@@ -9286,7 +9357,9 @@
 		},
 		"ED_Spider_ExploderTank_Electrical_Small": {
 			"Base": "ED_Spider_ExploderTank_Electrical",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -9439,7 +9512,9 @@
 		},
 		"ED_Spider_ExploderTank_Fire_Small": {
 			"Base": "ED_Spider_ExploderTank",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -9785,7 +9860,9 @@
 		},
 		"ED_Spider_ExploderTank_Goo_Small": {
 			"Base": "ED_Spider_ExploderTank",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -9955,7 +10032,9 @@
 		},
 		"ED_Spider_ExploderTank_Ice_Small": {
 			"Base": "ED_Spider_ExploderTank_Ice",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -10220,7 +10299,9 @@
 		},		
 		"ED_Spider_ExploderTank_Small": {
 			"Base": "ED_Spider_ExploderTank",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -10388,7 +10469,9 @@
 		},
 		"ED_Spider_ExploderTank_Radioactive_Small": {
 			"Base": "ED_Spider_ExploderTank",
-			"DifficultyRating": 105,
+			"DifficultyRating": {
+				"Var": "DifficultyRating_Bulk_Small"
+			},
 			"Direct": {
 				"Float:CarveDiameter": 900,
 				"Int:NumClusterBombs": 4,
@@ -11774,7 +11857,126 @@
 			"SpawnAmountModifier": 0.5
 		},		
 
-		"ED_Spider_ShieldTank": {
+		"ED_Spider_ShieldTank": {			
+			"Materials": {
+				"Mutate": "ByBiome",
+				"Default": [
+					"M_Spider_Tank_Body_Infected",
+					"M_Ossiran_Shell",
+					"M_Ossiran_Shell"
+				],
+				"AzureWeald": [
+					"M_Spider_Tank_Body_Infected",
+					"M_Biome_AzureWeald_Leaf_2",
+					"M_Biome_AzureWeald_Leaf_2"
+				],
+				"CrystalCaves": [
+					"M_AmberEnemy_Flesh",
+					"M_Spider_Hoarder_Body02",
+					"M_AmberEnemy_Armor"
+				],
+				"DenseBiozone": [
+					"M_Spider_Tank_Body_Infected",
+					"M_Biome_LushDownpour_ThornPlant",
+					"M_Biome_LushDownpour_ThornPlant"
+				],
+				"FungusBogs": [
+					"M_Plague_Tendrils",
+					"M_Hydra_Weed_Heart_Roots",
+					"M_Hydra_Weed_Heart_Roots"
+				],
+				"HollowBough": [
+					"M_Spider_ShieldTank_Body",
+					"M_ExplodingGooPlant_02_01",
+					"M_ExplodingGooPlant_02_01"
+				],
+				"IceCaves": [
+					"M_Flier_BomberIce_BombSacks",
+					"M_Spider_Tank_Armor_Ice",
+					"M_Flier_BomberIce_Flesh"
+				],
+				"MagmaCaves": [
+					"M_Spider_Lobber_GlowBubbles",
+					"M_Spider_Tank_Rock_Claws",
+					"M_Spider_Tank_Rock_A"
+				],
+				"RadioactiveExclusionZone": [
+					"M_MicrowaveGun_ExplodingBoil",
+					"M_Spider_Grunt_Armor_Radioactive",
+					"M_Spider_Grunt_Armor_Radioactive"
+				],
+				"SaltCaves": [
+					"M_Spider_Tank_Body_Infected",
+					"M_Biome_SaltCaves_Crystal01",
+					"M_Biome_SaltCaves_Crystal01"
+				],
+				"SandblastedCorridors": [
+					"M_Spider_ShieldTank_Body",
+					"M_Anniversary_Frills",
+					"M_Anniversary_Frills"
+				]
+			},
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 100,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -300,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}
+		},		
+		"ED_Spider_ShieldTank_X": {
+			"Base": "ED_Spider_ShieldTank",
+			"DisplayName": "Evolved Glyphid Opressor",
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [
@@ -11877,6 +12079,7 @@
 					"Var": "Resistance_Radiation"
 				}
 			},
+			"Scale": 1.2,
 			"Temperature": {
 				"TemperatureChangeScale": {
 					"Var": "Temperature_Scale_Normal"
@@ -12710,7 +12913,7 @@
 			"Movement": {
 				"MaxPawnSpeed": 1.2
 			},
-			"Projectile": "PRJ_WoodlouseAttack",
+			"Projectile": "PRJ_Biomes_WoodlouseAttack_Poison",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -13095,6 +13298,9 @@
 				},				
 				"ED_Spider_ShieldTank": {
 					"Var": "CustomVeterans_ShieldTank"
+				},				
+				"ED_Spider_ShieldTank_X": {
+					"Var": "CustomVeterans_ShieldTank_X"
 				}
 			},			
 			"Materials": {
@@ -13238,8 +13444,15 @@
 			"Base": "ED_Spider_Tank_red",
 			"CanBeUsedInEncounters": true,			
 			"CustomVeterans": {
-				"ED_Spider_Tank_Fire": 0.8,
-				"ED_Spider_ShieldTank": 0.2
+				"ED_Spider_Tank_Fire": {
+					"Var": "CustomVeterans_Tank"
+				},				
+				"ED_Spider_ShieldTank": {
+					"Var": "CustomVeterans_ShieldTank"
+				},				
+				"ED_Spider_ShieldTank_X": {
+					"Var": "CustomVeterans_ShieldTank_X"
+				}				
 			},
 			"Materials": [
 				"",
@@ -13308,8 +13521,15 @@
 		"ED_Spider_Tank_Ice": {
 			"CanBeUsedInEncounters": true,
 			"CustomVeterans": {
-				"ED_Spider_Tank_Ice": 0.8,
-				"ED_Spider_ShieldTank": 0.2
+				"ED_Spider_Tank_Ice": {
+					"Var": "CustomVeterans_Tank"
+				},				
+				"ED_Spider_ShieldTank": {
+					"Var": "CustomVeterans_ShieldTank"
+				},				
+				"ED_Spider_ShieldTank_X": {
+					"Var": "CustomVeterans_ShieldTank_X"
+				}
 			},
 			"DifficultyRating": 90,
 			"MaxSpawnCount": 4,
@@ -13418,9 +13638,10 @@
 			"Projectile": {
 				"Mutate": "ByBiome",
 				"Default": "PRJ_Spider_Tank_Boss",
-				"FungusBogs": "PRJ_ShootingPlant",
+				"AzureWeald": "PRJ_Biomes_ShootingPlant_Void",
+				"FungusBogs": "PRJ_Biomes_ShootingPlant_Poison",
 				"IceCaves":"PRJ_Crye_SnowBall",
-				"RadioactiveExclusionZone": "PRJ_SentryOvercharge_Projectile",
+				"RadioactiveExclusionZone": "PRJ_Biomes_ShootingPlant_Laser",
 				"SaltCaves": "PRJ_Base_Spider_Lobber_Projectile"
 			},				
 			"Resistances": {
@@ -13489,8 +13710,8 @@
 				"M_Flier_BomberGoo_BombSacks"
 			],
 			"MaxSpawnCount": 1,
-			"MinSpawnCount": 1,			
-			"Projectile": "PRJ_SentryOvercharge_Projectile",
+			"MinSpawnCount": 1,
+			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
 			"Rarity": {
 				"Var": "Rarity_Dreads"
 			},			
@@ -13559,7 +13780,7 @@
 			],
 			"MaxSpawnCount": 1,
 			"MinSpawnCount": 1,			
-			"Projectile": "PRJ_ShootingPlant",
+			"Projectile": "PRJ_Biomes_ShootingPlant_Poison",
 			"Rarity": {
 				"Var": "Rarity_Dreads"
 			},			
@@ -13686,8 +13907,15 @@
 			"Base": "ED_Spider_Tank_cyan",
 			"CanBeUsedInEncounters": true,
 			"CustomVeterans": {
-				"ED_Spider_Tank_Electro": 0.8,
-				"ED_Spider_ShieldTank": 0.2
+				"ED_Spider_Tank_Electro": {
+					"Var": "CustomVeterans_Tank"
+				},				
+				"ED_Spider_ShieldTank": {
+					"Var": "CustomVeterans_ShieldTank"
+				},				
+				"ED_Spider_ShieldTank_X": {
+					"Var": "CustomVeterans_ShieldTank_X"
+				}
 			},
 			"DifficultyRating": 90,
 			"DisplayName": "Electric Praetorian",
@@ -13831,8 +14059,15 @@
 			"Base": "ED_Spider_Tank_Mutated",
 			"CanBeUsedInEncounters": true,
 			"CustomVeterans": {
-				"ED_Spider_Tank_Mutated": 0.8,
-				"ED_Spider_ShieldTank": 0.2
+				"ED_Spider_Tank_Mutated": {
+					"Var": "CustomVeterans_Tank"
+				},				
+				"ED_Spider_ShieldTank": {
+					"Var": "CustomVeterans_ShieldTank"
+				},				
+				"ED_Spider_ShieldTank_X": {
+					"Var": "CustomVeterans_ShieldTank_X"
+				}
 			},
 			"DifficultyRating": 90,
 			"Materials": [
@@ -14527,7 +14762,10 @@
 		"ED_TentaclePlant": {
 			"AttackDamageMultiplier": {
 				"Mutate": "ByBiome",
-				"Default": 1
+				"Default": 1,
+				"IceCaves": 0.5,
+				"MagmaCaves": 0.5,
+				"RadioactiveExclusionZone": 0.5
 			},
 			"Materials": {
 				"Mutate": "ByBiome",
@@ -15267,7 +15505,11 @@
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
-					"Default": 100,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": 100,
+						"B": 0.7
+					},
 					"MagmaCaves": {
 						"Var": "Temperature_Burn_Normal"
 					}
@@ -15348,14 +15590,22 @@
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
-					"Default": 100,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": 100,
+						"B": 0.7
+					},
 					"MagmaCaves": {
 						"Var": "Temperature_Burn_Normal"
 					}
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
-					"Default": -120,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": -120,
+						"B": 0.7
+					},
 					"IceCaves": {					
 						"Var": "Temperature_Freeze_Normal"
 					}
@@ -15454,7 +15704,11 @@
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
-					"Default": -120,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": -120,
+						"B": 0.7
+					},
 					"IceCaves": {					
 						"Var": "Temperature_Freeze_Normal"
 					}
@@ -15523,14 +15777,22 @@
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
-					"Default": 100,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": 100,
+						"B": 0.7
+					},
 					"MagmaCaves": {
 						"Var": "Temperature_Burn_Normal"
 					}
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
-					"Default": -120,
+					"Default": {
+						"Mutate": "Multiply",
+						"A": -120,
+						"B": 0.7
+					},
 					"IceCaves": {					
 						"Var": "Temperature_Freeze_Normal"
 					}
@@ -15701,35 +15963,35 @@
 						"Default": false,
 						"DeepScan": {
 							"Mutate": "DuringMission",
-							"StartingAt": 60
+							"StartingAt": 45
 						},
 						"Egg": {
 							"Mutate": "DuringMission",
-							"StartingAt": 60
+							"StartingAt": 45
 						},
 						"Elimination": {
 							"Mutate": "DuringMission",
-							"StartingAt": 60
+							"StartingAt": 45
 						},
 						"Mining": {
 							"Mutate": "DuringMission",
-							"StartingAt": 60
+							"StartingAt": 45
 						},
 						"PE": {
 							"Mutate": "DuringMission",
-							"StartingAt": 300
+							"StartingAt": 225
 						},
 						"Refinery": {
 							"Mutate": "DuringMission",
-							"StartingAt": 300
+							"StartingAt": 225
 						},
 						"Sabotage": {
 							"Mutate": "DuringMission",
-							"StartingAt": 60
+							"StartingAt": 45
 						},
 						"Salvage": {
 							"Mutate": "DuringMission",
-							"StartingAt": 180
+							"StartingAt": 135
 						}
 					},
 					"Else": false
@@ -15741,9 +16003,9 @@
 					"Var": "BaseDifficultySelection"
 				},
 				"Default": 100,
-				"Evo I": 150,
-				"Evo II": 150,
-				"Evo III": 150
+				"Evo I": 125,
+				"Evo II": 125,
+				"Evo III": 125
 			},
 			"Interval": {
 				"Mutate": "Select",
@@ -15826,7 +16088,7 @@
 						"ED_Woodlouse"
 					],
 					"CrystalCaves": [
-						"ED_Bomber_Explosive_Electro",
+						"ED_Biomes_Bomber_Electric",
 						"ED_Biome_Spider_Grunt",
 						"ED_Biome_Mactera_Shooter_Amber",
 						"ED_Grabber",
@@ -15840,7 +16102,7 @@
 						"ED_Spider_Swarmer"
 					],
 					"DenseBiozone": [
-						"ED_Bomber_Explosive_Electro",
+						"ED_Biomes_Bomber_Electric",
 						"ED_Biome_Spider_Grunt",
 						"ED_Biome_Mactera_Shooter_Normal",
 						"ED_Grabber",
@@ -17355,21 +17617,21 @@
 		"Default": 1,
 		"Evo I": {
 			"Mutate": "ByDNA",
+			"Default": 1.2,
+			"Mining,2,1": 1.5,
+			"Sabotage": 1.5
+		},		
+		"Evo II": {
+			"Mutate": "ByDNA",
 			"Default": 1.35,
 			"Mining,2,1": 1.65,
 			"Sabotage": 1.65
-		},		
-		"Evo II": {
+		},
+		"Evo III": {
 			"Mutate": "ByDNA",
 			"Default": 1.5,
 			"Mining,2,1": 1.8,
 			"Sabotage": 1.8
-		},
-		"Evo III": {
-			"Mutate": "ByDNA",
-			"Default": 1.65,
-			"Mining,2,1": 1.95,
-			"Sabotage": 1.95
 		}		
 	},
 	"Messages": [
@@ -17408,6 +17670,26 @@
 						},
 						"Else": ""
 					},
+					{
+						"Mutate": "IfFloat",
+						"Value": {
+							"Mutate": "Countdown",
+							"Start": 2,
+							"Stop": 0,
+							"Enable": true
+						},
+						"==": 0,
+						"Then": {
+							"Mutate": "Select",
+							"Select": {
+								"Var": "Resistance_Switch"
+							},
+							"Default": "",
+							"on": "|    Resistances:         on                                                                                        ",
+							"off": "|    Resistances:         off                                                                                     "                                                                                          
+						},
+						"Else": ""
+					},					
 					"|_____________________________                                                                                                ",
 					"|                                                                                                                                           ",
 					"|      Info:     The Difficulty Description contains                                                                            ",
@@ -17615,7 +17897,9 @@
 			"WRN_RegenerativeEnemies",
 			"WRN_Swarmagedon",
 			"MMUT_BloodSugar",
-			"MMUT_OxygenRich"
+			"MMUT_OxygenRich",
+			"WRN_PitJawColony",
+			"WRN_ScrabNestingGrounds"			
 		]
 	},
 	"EscortMule": {

@@ -64,16 +64,34 @@
 	|                                                                                            |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
-	|  How to use:                                                                               |
-	|    Go to Vars-section under -> BaseDifficultySelection -> Value                            |
-	|    -> Fill difficulty's name from the list in quotation marks.                             |
+	|  To select the difficulty / turn resistances on or off:                                    |
+	|    -> BaseDifficultySelection -> Value -> type in difficulty from the list above           |
+	|                                           'Hazard #' or 'Evo I', 'Evo II', 'Evo III'       |
+	|    -> Resistance_Switch       -> Value -> type in 'On' or 'Off'                            |
 	|____________________________________________________________________________________________|
+	            |    |
+	            |    |
+	            |    |
+	            |    |
+	            |    |
+	        ____|    |____
+			\            /
+             \          /
+              \        /
+               \      /
+			    \    /
+			     \  /
+			      \/
 	",
 	"Vars": {
 		"BaseDifficultySelection": {
 			"Type": "String",
 			"Value": "Hazard 6"
-		},
+		},	
+		"Resistance_Switch": {
+			"Type": "String",
+			"Value": "On"			
+		},		
 		"Bulk2ndPhase_Movement": {
 			"Type": "Float",
 			"Value": {
@@ -191,10 +209,23 @@
 				"Select": {
 					"Var": "BaseDifficultySelection"
 				},
-				"Default": 0.2,
-				"Evo I": 0.15,
-				"Evo II": 0.15,
-				"Evo III": 0.15
+				"Default": 1,
+				"Evo I": 0.8,
+				"Evo II": 0.8,
+				"Evo III": 0.8
+			}
+		},		
+		"CustomVeterans_ShieldTank_X": {
+			"Type": "Float",
+			"Value": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "BaseDifficultySelection"
+				},
+				"Default": 0,
+				"Evo I": 0.2,
+				"Evo II": 0.2,
+				"Evo III": 0.2
 			}
 		},		
 		"CustomVeterans_RapidShooter": {
@@ -759,38 +790,79 @@
 				"DefaultValue": 14
 			}
 		},				
+		"Resistance_TEST": {
+			"Type": "Float",
+			"Value": {
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"AzureWeald": 0.8,
+					"CrystalCaves": 1,
+					"DenseBiozone": 1,
+					"FungusBogs": 1,
+					"IceCaves": 0.3,
+					"HollowBough": 0.8,
+					"MagmaCaves": 1.1,
+					"Default": 1,
+					"RadioactiveExclusionZone": 1.1,
+					"SaltCaves": 1,
+					"SandblastedCorridors": 1.1
+				}
+			}
+		},		
 		"Resistance_Cold": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 0.8,
-				"CrystalCaves": 1,
-				"DenseBiozone": 1,
-				"FungusBogs": 1,
-				"IceCaves": 0.3,
-				"HollowBough": 0.8,
-				"MagmaCaves": 1.1,
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
 				"Default": 1,
-				"RadioactiveExclusionZone": 1.1,
-				"SaltCaves": 1,
-				"SandblastedCorridors": 1.1
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"AzureWeald": 0.8,
+					"CrystalCaves": 1,
+					"DenseBiozone": 1,
+					"FungusBogs": 1,
+					"IceCaves": 0.3,
+					"HollowBough": 0.8,
+					"MagmaCaves": 1.1,
+					"Default": 1,
+					"RadioactiveExclusionZone": 1.1,
+					"SaltCaves": 1,
+					"SandblastedCorridors": 1.1
+				}
 			}
 		},		
 		"Resistance_Corrosive": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 1.1,
-				"CrystalCaves": 1.1,
-				"DenseBiozone": 1.1,
-				"FungusBogs": 0.8,
-				"IceCaves": 1.1,
-				"HollowBough": 1.1,
-				"MagmaCaves": 1,
-				"Default": 1.1,
-				"RadioactiveExclusionZone": 0.8,
-				"SaltCaves": 1,
-				"SandblastedCorridors": 1
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"AzureWeald": 1.1,
+					"CrystalCaves": 1.1,
+					"DenseBiozone": 1.1,
+					"FungusBogs": 0.8,
+					"IceCaves": 1.1,
+					"HollowBough": 1.1,
+					"MagmaCaves": 1,
+					"Default": 1.1,
+					"RadioactiveExclusionZone": 0.8,
+					"SaltCaves": 1,
+					"SandblastedCorridors": 1
+				}
 			}
 		},
 		"Resistance_Electric": {
@@ -817,72 +889,129 @@
 		"Resistance_Explosion": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 0.8,
-					"CrystalCaves": 1.1,
-					"DenseBiozone": 1,
-					"FungusBogs": 0.8,
-					"IceCaves": 1.1,
-					"HollowBough": 0.8,
-					"MagmaCaves": 1.1,
-					"Default": 1.1,
-					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 1.1,
-					"SandblastedCorridors": 1.1
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 0.8,
+						"CrystalCaves": 1.1,
+						"DenseBiozone": 1,
+						"FungusBogs": 0.8,
+						"IceCaves": 1.1,
+						"HollowBough": 0.8,
+						"MagmaCaves": 1.1,
+						"Default": 1.1,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 1.1,
+						"SandblastedCorridors": 1.1
+					}
 				}
 			}
 		},
 		"Resistance_Fire": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 0.8,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 1.1,
-					"CrystalCaves": 1,
-					"DenseBiozone": 0.8,
-					"FungusBogs": 1.1,
-					"IceCaves": 1,
-					"HollowBough": 1.1,
-					"MagmaCaves": 0.3,
-					"Default": 0.8,
-					"RadioactiveExclusionZone": 0.8,
-					"SaltCaves": 0.8,
-					"SandblastedCorridors": 0.8	
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 0.8,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1.1,
+						"CrystalCaves": 1,
+						"DenseBiozone": 0.8,
+						"FungusBogs": 1.1,
+						"IceCaves": 1,
+						"HollowBough": 1.1,
+						"MagmaCaves": 0.3,
+						"Default": 0.8,
+						"RadioactiveExclusionZone": 0.8,
+						"SaltCaves": 0.8,
+						"SandblastedCorridors": 0.8	
+					}
 				}
 			}
 		},
 		"Resistance_Kinetic": {
 			"Type": "Float",
 			"Value": {
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
 				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
-					"Mutate": "ByBiome",
-					"AzureWeald": 1.1,
-					"CrystalCaves": 0.8,
-					"DenseBiozone": 1.1,
-					"FungusBogs": 1.1,
-					"IceCaves": 0.8,
-					"HollowBough": 1,
-					"MagmaCaves": 0.8,
-					"Default": 0.8,
-					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 0.8,
-					"SandblastedCorridors": 0.8
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1.1,
+						"CrystalCaves": 0.8,
+						"DenseBiozone": 1.1,
+						"FungusBogs": 1.1,
+						"IceCaves": 0.8,
+						"HollowBough": 1,
+						"MagmaCaves": 0.8,
+						"Default": 0.8,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 0.8,
+						"SandblastedCorridors": 0.8
+					}
 				}
 			}
 		},
 		"Resistance_Physical": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByMissionType",
-				"Sabotage": 1,
-				"Default": {				
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 1,
+					"Default": {				
+						"Mutate": "ByBiome",
+						"AzureWeald": 1,
+						"CrystalCaves": 1.1,
+						"DenseBiozone": 1,
+						"FungusBogs": 1,
+						"IceCaves": 1,
+						"HollowBough": 1,
+						"MagmaCaves": 1.1,
+						"Default": 1,
+						"RadioactiveExclusionZone": 1,
+						"SaltCaves": 1.1,
+						"SandblastedCorridors": 1
+					}
+				}
+			}
+		},
+		"Resistance_Piercing": {
+			"Type": "Float",
+			"Value": {
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
+				"Default": 1,
+				"Off": 1,
+				"On": {
 					"Mutate": "ByBiome",
 					"AzureWeald": 1,
 					"CrystalCaves": 1.1,
@@ -890,46 +1019,49 @@
 					"FungusBogs": 1,
 					"IceCaves": 1,
 					"HollowBough": 1,
-					"MagmaCaves": 1.1,
+					"MagmaCaves": 0.8,
 					"Default": 1,
 					"RadioactiveExclusionZone": 1,
-					"SaltCaves": 1.1,
-					"SandblastedCorridors": 1
+					"SaltCaves": 0.8,
+					"SandblastedCorridors":	0.8
 				}
-			}
-		},
-		"Resistance_Piercing": {
-			"Type": "Float",
-			"Value": {
-				"Mutate": "ByBiome",
-				"AzureWeald": 1,
-				"CrystalCaves": 1.1,
-				"DenseBiozone": 1,
-				"FungusBogs": 1,
-				"IceCaves": 1,
-				"HollowBough": 1,
-				"MagmaCaves": 0.8,
-				"Default": 1,
-				"RadioactiveExclusionZone": 1,
-				"SaltCaves": 0.8,
-				"SandblastedCorridors":	0.8
 			}
 		},
 		"Resistance_Poison": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
 				"Default": 1,
-				"FungusBogs": 0,
-				"HollowBough": 0
+				"Off": 1,
+				"On": {
+					"Mutate": "ByMissionType",
+					"Sabotage": 0,
+					"Default": {					
+						"Mutate": "ByBiome",
+						"Default": 1,
+						"FungusBogs": 0,
+						"HollowBough": 0
+					}
+				}
 			}
 		},
 		"Resistance_Radiation": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "ByBiome",
+				"Mutate": "Select",
+				"Select": {
+					"Resistance_Switch"
+				},
 				"Default": 1,
-				"RadioactiveExclusionZone": 0
+				"Off": 1,
+				"On": {
+					"Mutate": "ByBiome",
+					"Default": 1,
+					"RadioactiveExclusionZone": 0
+				}
 			}
 		},
 		"SpawnAmountModifier_Woodlouse": {
@@ -5880,16 +6012,6 @@
 			"Base": "ED_Mactera_Shooter_HeavyVeteran",
 			"DifficultyRating": 45,
 			"DisplayName": "Twilight Mactera",
-			"Heal": {
-				"Mutate": "IfFloat",
-				"Value": {
-					"Mutate": "EnemyDistance",
-					"ED": "ED_Mactera_Shooter_Phantom"
-				},
-				">=": 8000,
-				"Then": -10000,
-				"Else": 0
-			},
 			"HealthRaw": 300,
 			"Materials": [
 				"M_Plague_Projectile_Wobble",
@@ -5956,7 +6078,7 @@
 				">=": 5000,
 				"Then": -10000000000000000000,
 				"Else": 0
-			},			
+			},		
 			"Materials": [
 				"M_PlanetHologram_Solid",
 				"M_CaveHolo_Transition"

@@ -5,7 +5,7 @@
 	|                                                                                            |
 	|                                A Biome Specific Difficulty                                 |
 	|                                        By Xanthus                                          |
-	|                                     - Version b142 -                                       |
+	|                                     - Version b143 -                                       |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
 	|                                Weapon Damage Scaling [%]:                                  |
@@ -77,13 +77,13 @@
 	            |    |
 	            |    |
 	        ____|    |____
-            \            /
-             \          /
-              \        /
-               \      /
-                \    /
-                 \  /
-                  \/
+	        \            /
+	         \          /
+	          \        /
+	           \      /
+	            \    /
+	             \  /
+	              \/
 	",
 	"Vars": {
 		"BaseDifficultySelection": {
@@ -1496,7 +1496,7 @@
 						],
 						"MagmaCaves": [
 							"ED_Biome_Spider_Grunt",
-							"ED_Bomber_Explosive",
+							"ED_Biomes_Bomber_Fire",
 							"ED_Grabber",
 							"ED_Biome_Mactera_Shooter_Normal",
 							"ED_Spider_Buffer",
@@ -4341,6 +4341,48 @@
 			},
 			"SpawnAmountModifier": 0.5
 		},
+		"ED_Biomes_Bomber_Fire": {
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 95,
+			"DisplayName": "Fire Bomber",
+			"MaxSpawnCount": 1,
+			"MinSpawnCount": 1,
+			"Rarity": 8,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"SpawnAmountModifier": 0.5
+		},		
 		"ED_Bomber_Explosive_Invisible": {
 			"Base": "ED_Bomber_Explosive",
 			"DisplayName": "Azure Weald Bulk",
@@ -16161,7 +16203,7 @@
 					"MagmaCaves": [
 						"ED_Biome_Mactera_Shooter_Normal",
 						"ED_Biome_Spider_Grunt",
-						"ED_Bomber_Explosive",
+						"ED_Biomes_Bomber_Fire",
 						"ED_Grabber",
 						"ED_Spider_Spitter_Fireball",
 						"ED_Spider_Lobber",

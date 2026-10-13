@@ -5,7 +5,7 @@
 	|                                                                                            |
 	|                                A Biome Specific Difficulty                                 |
 	|                                        By Xanthus                                          |
-	|                                     - Version b146 -                                       |
+	|                                     - Version b147 -                                       |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
 	|                                Weapon Damage Scaling [%]:                                  |
@@ -1066,6 +1066,19 @@
 				}
 			}
 		},
+		"SpawnAmountModifier_Swarmer": {
+			"Type": "Float",
+			"Value": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "BaseDifficultySelection"
+				},
+				"Default": 0.5,
+				"Evo I": 0.25,
+				"Evo II": 0.25,
+				"Evo III": 0.25
+			}				
+		},		
 		"SpawnAmountModifier_Woodlouse": {
 			"Type": "Float",
 			"Value": {				
@@ -5538,7 +5551,7 @@
 				"Mutate": "ByBiome",
 				"Default": "ED_Spider_Swarmer",
 				"AzureWeald": "ED_Spider_Swarmer",
-				"CrystalCaves": "ED_Jelly_Swarmer",
+				"CrystalCaves": "ED_Spider_Swarmer",
 				"DenseBiozone": "ED_Jelly_Swarmer",
 				"FungusBogs": "ED_InfestationLarva",
 				"HollowBough": "ED_InfestationLarva",
@@ -5768,58 +5781,6 @@
 			},
 			"Scale": 1.2,
 			"SpawnAmountModifier": 0.5			
-		},
-		
-		"ED_InfestationLarva": {
-			"CanBeUsedInEncounters": false,
-			"DifficultyRating": 6,
-			"MinSpawnCount": 8,
-			"Movement": {
-				"AlignDirectionSpeed": 1.1,
-				"AlignToTargetMinRequiredAngle": 1.1,
-				"FleeSpeedBoostMultiplier": 1.5,
-				"MaxAcceleration": 1.1,
-				"MaxBrakingDeceleration": 1.1,
-				"MaxPawnSpeed": 1.15,
-				"MaxSlowdownAngle": 1.1,
-				"MaxStrafeDistance": 1.1,
-				"MinSlowdownAngle": 1.1,
-				"StrafeSpeed": 1.1
-			},
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Significance": "Swarmer"
 		},
 		
 		"ED_JellyBreeder": {
@@ -8624,93 +8585,6 @@
 					"Var": "Temperature_FreezeDie"
 				}
 			}			
-		},
-		"ED_Spider_Exploder_Fire_Mini": {
-			"AttackDamageMultiplier": 0.5,
-			"Base": "ED_Spider_Exploder_Fire",
-			"CanBeUsedForConstantPressure": true,
-			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 6,
-			"Direct": {
-				"Bool:ExplodeOnDeath": false
-			},
-			"HealthRaw": 12,			
-			"MinSpawnCount": 8,
-			"Movement": {
-				"AlignDirectionSpeed": 1.1,
-				"AlignToTargetMinRequiredAngle": 1.1,
-				"FleeSpeedBoostMultiplier": 1.5,
-				"MaxAcceleration": 1.1,
-				"MaxBrakingDeceleration": 1.1,
-				"MaxPawnSpeed": 1.25,
-				"MaxSlowdownAngle": 1.1,
-				"MaxStrafeDistance": 1.1,
-				"MinSlowdownAngle": 1.1,
-				"StrafeSpeed": 1.1
-			},
-			"PST_ExplodeOnDeath": 1,
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 0.5,
-			"Significance": "Swarmer",
-			"SpawnAmountModifier": 0.5,
-			"UsesSpawnEffects": false,
-			"Temperature": {
-				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
-				},
-				"BurnTemperature": {
-					"Mutate": "ByBiome",
-					"Default": 10,
-					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
-					}
-				},				
-				"FreezeTemperature": {
-					"Mutate": "ByBiome",
-					"Default": -10,
-					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
-					}
-				},
-				"DieIfBurning": {
-					"Var": "Temperature_BurnDie"
-				},				
-				"DieIfFrozen": {
-					"Var": "Temperature_FreezeDie"
-				}
-			}			
 		},		
 		"ED_Spider_Exploder_Fungus": {
 			"Base": "ED_Spider_Exploder_fungus",
@@ -8732,67 +8606,6 @@
 			},
 			"PST_ExplodeOnDeath": 1,
 			"SpawnAmountModifier": 0.5
-		},
-		"ED_Spider_Exploder_Fungus_Mini": {
-			"AttackDamageMultiplier": 0.5,
-			"Base": "ED_Spider_Exploder_Fungus",
-			"CanBeUsedForConstantPressure": true,
-			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 6,
-			"Direct": {
-				"Bool:ExplodeOnDeath": false
-			},
-			"HealthRaw": 12,			
-			"MinSpawnCount": 8,
-			"Movement": {
-				"AlignDirectionSpeed": 1.1,
-				"AlignToTargetMinRequiredAngle": 1.1,
-				"FleeSpeedBoostMultiplier": 1.5,
-				"MaxAcceleration": 1.1,
-				"MaxBrakingDeceleration": 1.1,
-				"MaxPawnSpeed": 1.25,
-				"MaxSlowdownAngle": 1.1,
-				"MaxStrafeDistance": 1.1,
-				"MinSlowdownAngle": 1.1,
-				"StrafeSpeed": 1.1
-			},
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 0.5,
-			"Significance": "Swarmer",
-			"SpawnAmountModifier": 0.5,
-			"UsesSpawnEffects": false
 		},
 		"ED_Spider_Exploder_Ice": {
 			"Base": "ED_Spider_Exploder_frost",
@@ -8819,93 +8632,6 @@
 				"RadiationDamageMultiplier": 0.8
 			},
 			"SpawnAmountModifier": 0.5,
-			"Temperature": {
-				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
-				},
-				"BurnTemperature": {
-					"Mutate": "ByBiome",
-					"Default": 10,
-					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
-					}
-				},				
-				"FreezeTemperature": {
-					"Mutate": "ByBiome",
-					"Default": -10,
-					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
-					}
-				},
-				"DieIfBurning": {
-					"Var": "Temperature_BurnDie"
-				},				
-				"DieIfFrozen": {
-					"Var": "Temperature_FreezeDie"
-				}
-			}			
-		},
-		"ED_Spider_Exploder_Ice_Mini": {
-			"AttackDamageMultiplier": 0.5,
-			"Base": "ED_Spider_Exploder_frost",
-			"CanBeUsedForConstantPressure": true,
-			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 6,
-			"Direct": {
-				"Bool:ExplodeOnDeath": false
-			},
-			"HealthRaw": 12,			
-			"MinSpawnCount": 8,
-			"Movement": {
-				"AlignDirectionSpeed": 1.1,
-				"AlignToTargetMinRequiredAngle": 1.1,
-				"FleeSpeedBoostMultiplier": 1.5,
-				"MaxAcceleration": 1.1,
-				"MaxBrakingDeceleration": 1.1,
-				"MaxPawnSpeed": 1.25,
-				"MaxSlowdownAngle": 1.1,
-				"MaxStrafeDistance": 1.1,
-				"MinSlowdownAngle": 1.1,
-				"StrafeSpeed": 1.1
-			},
-			"PST_ExplodeOnDeath": 1,
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 0.5,
-			"Significance": "Swarmer",
-			"SpawnAmountModifier": 0.5,
-			"UsesSpawnEffects": false,
 			"Temperature": {
 				"TemperatureChangeScale": {
 					"Var": "Temperature_Scale_Normal"
@@ -13120,127 +12846,6 @@
 			}			
 		},
 
-		"ED_Spider_Swarmer": {
-			"CanBeUsedForConstantPressure": true,
-			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 6,
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [
-					"M_Coral_D"
-				],
-				"AzureWeald": [
-					"M_Spider_Spawn"
-				],
-				"CrystalCaves": [
-					"M_AmberEnemy_Flesh"
-				],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Body"
-				],				
-				"HollowBough": [
-					"M_Canteen_Leather_1"
-				],
-				"IceCaves": [
-					"M_Spider_Swarmer_Ice"
-				],
-				"MagmaCaves": [
-					"M_Spider_Swarmer_Pheromone"
-				],				
-				"RadioactiveExclusionZone": [
-					"M_Spider_Swarmer_Radioactive"
-				],
-				"SaltCaves": [
-					"M_Spider_Swarmer_Pheromone"
-				],
-				"SandblastedCorridors": [
-					"M_Anniversary_Frills"
-				]				
-			},
-			"MinSpawnCount": 8,
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Scale": 1
-		},
-		"ED_Ossiran_Scrab": {
-			"CanBeUsedForConstantPressure": true,
-			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 6,
-			"HealthRaw": 12,
-			"MinSpawnCount": 8,
-			"Rarity": 4,
-			"Resistances": {
-				"ColdDamageMultiplier": {
-					"Var": "Resistance_Cold"
-				},
-				"CorrosiveDamageMultiplier": {
-					"Var": "Resistance_Corrosive"
-				},
-				"ElectricDamageMultiplier": {
-					"Var": "Resistance_Electric"
-				},
-				"ExplosionDamageMultiplier": {
-					"Var": "Resistance_Explosion"
-				},
-				"FireDamageMultiplier": {
-					"Var": "Resistance_Fire"
-				},
-				"KineticDamageMultiplier": {
-					"Var": "Resistance_Kinetic"
-				},
-				"PhysicalDamageMultiplier": {
-					"Var": "Resistance_Physical"
-				},
-				"PiercingDamageMultiplier": {
-					"Var": "Resistance_Piercing"
-				},
-				"PoisonDamageMultiplier": {
-					"Var": "Resistance_Poison"
-				},
-				"RadiationDamageMultiplier": {
-					"Var": "Resistance_Radiation"
-				}
-			},
-			"Significance": "Swarmer",
-			"Temperature": {
-				"BurnTemperature": 5,
-				"FreezeTemperature": -20,
-				"WarmingRate": 2,
-				"CoolingRate": 1
-			}
-		},
-
 		"ED_Spider_Tank": {
 			"CustomVeterans": {
 				"ED_Spider_Tank": {
@@ -14354,6 +13959,432 @@
 			}
 		},
 
+		"ED_Spider_Swarmer": {
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 6,
+			"Materials": {
+				"Mutate": "ByBiome",
+				"Default": [
+					"M_Coral_D"
+				],
+				"AzureWeald": [
+					"M_Spider_Spawn"
+				],
+				"CrystalCaves": [
+					"M_AmberEnemy_Flesh"
+				],
+				"FungusBogs": [
+					"M_Hydra_Weed_Heart_Body"
+				],				
+				"HollowBough": [
+					"M_Canteen_Leather_1"
+				],
+				"IceCaves": [
+					"M_Spider_Swarmer_Ice"
+				],
+				"MagmaCaves": [
+					"M_Spider_Swarmer_Pheromone"
+				],				
+				"RadioactiveExclusionZone": [
+					"M_Spider_Swarmer_Radioactive"
+				],
+				"SaltCaves": [
+					"M_Spider_Swarmer_Pheromone"
+				],
+				"SandblastedCorridors": [
+					"M_Anniversary_Frills"
+				]				
+			},
+			"MinSpawnCount": 8,
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			}			
+		},
+		"ED_Jelly_Swarmer": {
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			}			
+		},
+		"ED_Ossiran_Scrab": {
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 6,
+			"HealthRaw": 12,
+			"MinSpawnCount": 8,
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Significance": "Swarmer",
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			},			
+			"Temperature": {
+				"BurnTemperature": 5,
+				"FreezeTemperature": -20,
+				"WarmingRate": 2,
+				"CoolingRate": 1
+			}			
+		},
+		"ED_InfestationLarva": {
+			"CanBeUsedInEncounters": false,
+			"DifficultyRating": 6,
+			"MinSpawnCount": 8,
+			"Movement": {
+				"AlignDirectionSpeed": 1.1,
+				"AlignToTargetMinRequiredAngle": 1.1,
+				"FleeSpeedBoostMultiplier": 1.5,
+				"MaxAcceleration": 1.1,
+				"MaxBrakingDeceleration": 1.1,
+				"MaxPawnSpeed": 1.15,
+				"MaxSlowdownAngle": 1.1,
+				"MaxStrafeDistance": 1.1,
+				"MinSlowdownAngle": 1.1,
+				"StrafeSpeed": 1.1
+			},
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			},			
+			"Significance": "Swarmer"
+		},
+		"ED_Spider_Exploder_Fire_Mini": {
+			"AttackDamageMultiplier": 0.5,
+			"Base": "ED_Spider_Exploder_Fire",
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 6,
+			"Direct": {
+				"Bool:ExplodeOnDeath": false
+			},
+			"HealthRaw": 12,			
+			"MinSpawnCount": 8,
+			"Movement": {
+				"AlignDirectionSpeed": 1.1,
+				"AlignToTargetMinRequiredAngle": 1.1,
+				"FleeSpeedBoostMultiplier": 1.5,
+				"MaxAcceleration": 1.1,
+				"MaxBrakingDeceleration": 1.1,
+				"MaxPawnSpeed": 1.25,
+				"MaxSlowdownAngle": 1.1,
+				"MaxStrafeDistance": 1.1,
+				"MinSlowdownAngle": 1.1,
+				"StrafeSpeed": 1.1
+			},
+			"PST_ExplodeOnDeath": 1,
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 0.5,
+			"Significance": "Swarmer",
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			},
+			"UsesSpawnEffects": false,
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 10,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -10,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
+		},		
+		"ED_Spider_Exploder_Fungus_Mini": {
+			"AttackDamageMultiplier": 0.5,
+			"Base": "ED_Spider_Exploder_Fungus",
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 6,
+			"Direct": {
+				"Bool:ExplodeOnDeath": false
+			},
+			"HealthRaw": 12,			
+			"MinSpawnCount": 8,
+			"Movement": {
+				"AlignDirectionSpeed": 1.1,
+				"AlignToTargetMinRequiredAngle": 1.1,
+				"FleeSpeedBoostMultiplier": 1.5,
+				"MaxAcceleration": 1.1,
+				"MaxBrakingDeceleration": 1.1,
+				"MaxPawnSpeed": 1.25,
+				"MaxSlowdownAngle": 1.1,
+				"MaxStrafeDistance": 1.1,
+				"MinSlowdownAngle": 1.1,
+				"StrafeSpeed": 1.1
+			},
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 0.5,
+			"Significance": "Swarmer",
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			},
+			"UsesSpawnEffects": false
+		},
+		"ED_Spider_Exploder_Ice_Mini": {
+			"AttackDamageMultiplier": 0.5,
+			"Base": "ED_Spider_Exploder_frost",
+			"CanBeUsedForConstantPressure": true,
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 6,
+			"Direct": {
+				"Bool:ExplodeOnDeath": false
+			},
+			"HealthRaw": 12,			
+			"MinSpawnCount": 8,
+			"Movement": {
+				"AlignDirectionSpeed": 1.1,
+				"AlignToTargetMinRequiredAngle": 1.1,
+				"FleeSpeedBoostMultiplier": 1.5,
+				"MaxAcceleration": 1.1,
+				"MaxBrakingDeceleration": 1.1,
+				"MaxPawnSpeed": 1.25,
+				"MaxSlowdownAngle": 1.1,
+				"MaxStrafeDistance": 1.1,
+				"MinSlowdownAngle": 1.1,
+				"StrafeSpeed": 1.1
+			},
+			"PST_ExplodeOnDeath": 1,
+			"Rarity": 4,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"Scale": 0.5,
+			"Significance": "Swarmer",
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Swarmer"
+			},
+			"UsesSpawnEffects": false,
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 10,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -10,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
+		},
+
 		"ED_Sprout_MotherSpawn": {
 			"AttackDamageMultiplier": {
 				"Mutate": "ByBiome",
@@ -14715,9 +14746,13 @@
 				"Mutate": "ByBiome",
 				"Default": 1,
 				"IceCaves": 0.5,
-				"MagmaCaves": 0.5,
 				"RadioactiveExclusionZone": 0.5
 			},
+			"CustomVeterans": {
+				"Mutate": "ByBiome",
+				"Default": "ED_TentaclePlant",
+				"MagmaCaves": "ED_Biomes_TentaclePlant_Fire"
+			},			
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
@@ -14736,7 +14771,6 @@
 				"Mutate": "ByBiome",
 				"Default": "PRJ_TentaclePlant_New",
 				"IceCaves": "PRJ_Biomes_ShootingPlant_Ice",
-				"MagmaCaves": "PRJ_Biomes_ShootingPlant_Fire",
 				"RadioactiveExclusionZone": "PRJ_Biomes_ShootingPlant_Laser"
 			},
 			"Temperature": {

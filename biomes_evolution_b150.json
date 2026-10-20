@@ -5,7 +5,7 @@
 	|                                                                                            |
 	|                                A Biome Specific Difficulty                                 |
 	|                                        By Xanthus                                          |
-	|                                     - Version b148 -                                       |
+	|                                     - Version b150 -                                       |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
 	|                                Weapon Damage Scaling [%]:                                  |
@@ -69,6 +69,8 @@
 	|    -> BaseDifficultySelection -> 'Value' -> Type in Difficulty from the List above         |
 	|                                           'Hazard #' or 'Evo I', 'Evo II', 'Evo III'       |
 	|                                                                                            |
+	|    -> Evolution_Switch        -> 'Value' -> type in 'on' or 'off'                          |
+	|                                                                                            |
 	|    -> Resistance_Switch       -> 'Value' -> type in 'on' or 'off'                          |
 	|____________________________________________________________________________________________|
 	            |    |
@@ -88,11 +90,15 @@
 	"Vars": {
 		"BaseDifficultySelection": {
 			"Type": "String",
-			"Value": "Evo II"
+			"Value": "Hazard 6"
 		},
 		"Resistance_Switch": {
 			"Type": "String",
 			"Value": "On"			
+		},
+		"Evolution_Switch": {
+			"Type": "String",
+			"Value": "On"
 		},
 		"Bulk2ndPhase_Movement": {
 			"Type": "Float",
@@ -183,12 +189,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.8,
-				"Evo I": 0.7,
-				"Evo II": 0.7,
-				"Evo III": 0.7
+				"On": 0.7
 			}
 		},
 		"CustomVeterans_Tank_X": {
@@ -196,12 +200,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0,
-				"Evo I": 0.1,
-				"Evo II": 0.1,
-				"Evo III": 0.1
+				"On": 0.1
 			}
 		},		
 		"CustomVeterans_ShieldTank": {
@@ -209,12 +211,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.2,
-				"Evo I": 0.18,
-				"Evo II": 0.18,
-				"Evo III": 0.18
+				"On": 0.18
 			}
 		},		
 		"CustomVeterans_ShieldTank_X": {
@@ -222,12 +222,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0,
-				"Evo I": 0.02,
-				"Evo II": 0.02,
-				"Evo III": 0.02
+				"On": 0.02
 			}
 		},		
 		"CustomVeterans_RapidShooter": {
@@ -235,12 +233,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 1,
-				"Evo I": 0.7,
-				"Evo II": 0.7,
-				"Evo III": 0.7
+				"On": 0.7
 			}
 		},
 		"CustomVeterans_RapidShooter_X": {
@@ -248,12 +244,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0,
-				"Evo I": 0.3,
-				"Evo II": 0.3,
-				"Evo III": 0.3
+				"On": 0.3
 			}
 		},		
 		"CustomVeterans_Woodlouse": {
@@ -261,12 +255,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 1,
-				"Evo I": 0.8,
-				"Evo II": 0.8,
-				"Evo III": 0.8
+				"On": 0.8
 			}
 		},
 		"CustomVeterans_Woodlouse_X": {
@@ -277,77 +269,82 @@
 					"Var": "BaseDifficultySelection"
 				},
 				"Default": 0,
-				"Evo I": 0.2,
-				"Evo II": 0.2,
-				"Evo III": 0.2
+				"On": 0.2
 			}
 		},		
 		"DifficultyRating_Bulk": {
 			"Type": "Float",
 			"Value": {				
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 120,
+					"Hazard 6": 200,
+					"Hazard 7": 225,
+					"Hazard 8": 250,
+					"Hazard 9": 275
 				},
-				"Default": 120,
-				"Hazard 6": 200,
-				"Hazard 7": 225,
-				"Hazard 8": 250,
-				"Hazard 9": 275,
-				"Evo I": 300,
-				"Evo II": 350,
-				"Evo III": 400
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}
 			}		
 		},
 		"DifficultyRating_Bulk_Small": {
 			"Type": "Float",
 			"Value": {				
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 100,
+					"Hazard 6": 100,
+					"Hazard 7": 120,
+					"Hazard 8": 140,
+					"Hazard 9": 160
 				},
-				"Default": 100,
-				"Hazard 6": 100,
-				"Hazard 7": 120,
-				"Hazard 8": 140,
-				"Hazard 9": 160,
-				"Evo I": 150,
-				"Evo II": 180,
-				"Evo III": 210
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}
 			}		
 		},		
 		"DifficultyRating_Dread": {
 			"Type": "Float",
 			"Value": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {				
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 120,
+					"Hazard 6": 140,
+					"Hazard 7": 160,
+					"Hazard 8": 180,
+					"Hazard 9": 200
 				},
-				"Default": 120,
-				"Hazard 6": 140,
-				"Hazard 7": 160,
-				"Hazard 8": 180,
-				"Hazard 9": 200,
-				"Evo I": 210,
-				"Evo II": 240,
-				"Evo III": 270
-			}
-		},
-		"DifficultyRating_Special": {
-			"Type": "Float",
-			"Value": {			
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
-				},
-				"Default": 120,
-				"Hazard 6": 200,
-				"Hazard 7": 225,
-				"Hazard 8": 250,
-				"Hazard 9": 275,
-				"Evo I": 100,
-				"Evo II": 100,
-				"Evo III": 100
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}					
 			}
 		},		
 		"Pools_ByBiome_Bulks": {
@@ -1073,12 +1070,10 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"Evo I": 0.25,
-				"Evo II": 0.25,
-				"Evo III": 0.25
+				"On": 0.25
 			}				
 		},		
 		"SpawnAmountModifier_Woodlouse": {
@@ -1086,12 +1081,21 @@
 			"Value": {				
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"Evo I": 0.2,
-				"Evo II": 0.2,
-				"Evo III": 0.2
+				"On": 0.2
+			}				
+		},		
+		"SpawnAmountModifier_Lobber": {
+			"Type": "Float",
+			"Value": {				
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Evolution_Switch"
+				},
+				"Default": 0.5,
+				"On": 0.2
 			}				
 		},
 		"Temperature_BurnDie": {
@@ -1213,7 +1217,7 @@
 		},								
 		"Temperature_Freeze_Special": {
 			"Type": "Float",
-			"Value": -1000
+			"Value": -2000
 		},				
 		"Temperature_Freeze_Boss": {
 			"Type": "Float",
@@ -1352,7 +1356,7 @@
 							"ED_Spider_Exploder",
 							"ED_Spider_ExploderTank_MotherOfThousands",
 							"ED_Spider_ExploderTank_Small",
-							"ED_Spider_Shooter_EPC",
+							"ED_Spider_Shooter_Void",
 							"ED_Spider_Stinger",
 							"ED_Spider_Swarmer",
 							"ED_Spider_Stalker",
@@ -1652,62 +1656,94 @@
 		},
 		"DisruptiveEnemyPoolCount": {
 			"Min": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {				
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 4,
+					"Hazard 6": 5,
+					"Hazard 7": 7,
+					"Hazard 8": 9,
+					"Hazard 9": 11
 				},
-				"Default": 4,
-				"Hazard 6": 5,
-				"Hazard 7": 7,
-				"Hazard 8": 9,
-				"Hazard 9": 11,
-				"Evo I": 7,
-				"Evo II": 10,
-				"Evo III": 13
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}					
 			},
 			"Max": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 6,
+					"Hazard 6": 7,
+					"Hazard 7": 9,
+					"Hazard 8": 11,
+					"Hazard 9": 13
 				},
-				"Default": 6,
-				"Hazard 6": 7,
-				"Hazard 7": 9,
-				"Hazard 8": 11,
-				"Hazard 9": 13,
-				"Evo I": 10,
-				"Evo II": 13,
-				"Evo III": 16
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}					
 			}
 		},
 		"StationaryEnemyCount": {
 			"Min": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {				
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 2,
+					"Hazard 6": 6,
+					"Hazard 7": 6,
+					"Hazard 8": 6,
+					"Hazard 9": 6
 				},
-				"Default": 12,
-				"Hazard 6": 6,
-				"Hazard 7": 6,
-				"Hazard 8": 6,
-				"Hazard 9": 6,
-				"Evo I": 9,
-				"Evo II": 9,
-				"Evo III": 9
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}				
 			},
 			"Max": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
+				"Mutate": "Multiply",
+				"A": {				
+					"Mutate": "Select",
+					"Select": {
+						"Var": "BaseDifficultySelection"
+					},
+					"Default": 2,
+					"Hazard 6": 6,
+					"Hazard 7": 6,
+					"Hazard 8": 6,
+					"Hazard 9": 6
 				},
-				"Default": 16,
-				"Hazard 6": 6,
-				"Hazard 7": 6,
-				"Hazard 8": 6,
-				"Hazard 9": 6,
-				"Evo I": 9,
-				"Evo II": 9,
-				"Evo III": 9
+				"B": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				}
 			}
 		},
 		"StationaryPool": {
@@ -1727,12 +1763,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Rock_X",
-								"Evo II": "ED_ShootingPlant_Rock_X",
-								"Evo III": "ED_ShootingPlant_Rock_X"
+								"On": "ED_ShootingPlant_Rock_X"
 							}
 						],
 						"AzureWeald": [
@@ -1744,12 +1778,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Void_X",
-								"Evo II": "ED_ShootingPlant_Void_X",
-								"Evo III": "ED_ShootingPlant_Void_X"
+								"On": "ED_ShootingPlant_Void_X"
 							}
 						],
 						"CrystalCaves": [
@@ -1761,12 +1793,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Electric_X",
-								"Evo II": "ED_ShootingPlant_Electric_X",
-								"Evo III": "ED_ShootingPlant_Electric_X"
+								"On": "ED_ShootingPlant_Electric_X"
 							}							
 						],
 						"DenseBiozone": [
@@ -1778,12 +1808,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Electric_X",
-								"Evo II": "ED_ShootingPlant_Electric_X",
-								"Evo III": "ED_ShootingPlant_Electric_X"
+								"On": "ED_ShootingPlant_Electric_X"
 							}							
 						],
 						"FungusBogs": [
@@ -1795,12 +1823,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Poison_X",
-								"Evo II": "ED_ShootingPlant_Poison_X",
-								"Evo III": "ED_ShootingPlant_Poison_X"
+								"On": "ED_ShootingPlant_Poison_X"
 							}							
 						],
 						"HollowBough": [
@@ -1812,12 +1838,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Poison_X",
-								"Evo II": "ED_ShootingPlant_Poison_X",
-								"Evo III": "ED_ShootingPlant_Poison_X"
+								"On": "ED_ShootingPlant_Poison_X"
 							}							
 						],
 						"IceCaves": [
@@ -1826,15 +1850,14 @@
 							"ED_CaveLeech_Big",
 							"ED_JellyBreeder_ExploderMini_Ice",
 							"ED_ShootingPlant_Ice",
+							"ED_Biomes_TentaclePlant_Ice",				
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Ice_X",
-								"Evo II": "ED_ShootingPlant_Ice_X",
-								"Evo III": "ED_ShootingPlant_Ice_X"
+								"On": "ED_ShootingPlant_Ice_X"
 							}							
 						],
 						"MagmaCaves": [
@@ -1843,15 +1866,14 @@
 							"ED_CaveLeech_Big",
 							"ED_JellyBreeder_ExploderMini",
 							"ED_ShootingPlant_Fire",
+							"ED_Biomes_TentaclePlant_Fire",
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Fire_X",
-								"Evo II": "ED_ShootingPlant_Fire_X",
-								"Evo III": "ED_ShootingPlant_Fire_X"
+								"On": "ED_ShootingPlant_Fire_X"
 							}							
 						],
 						"RadioactiveExclusionZone": [
@@ -1860,15 +1882,14 @@
 							"ED_CaveLeech_Big",
 							"ED_JellyBreeder_Swarmer",
 							"ED_ShootingPlant_Laser",
+							"ED_Biomes_TentaclePlant_Laser",
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Laser_X",
-								"Evo II": "ED_ShootingPlant_Laser_X",
-								"Evo III": "ED_ShootingPlant_Laser_X"
+								"On": "ED_ShootingPlant_Laser_X"
 							}							
 						],
 						"SaltCaves": [
@@ -1880,12 +1901,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Rock_X",
-								"Evo II": "ED_ShootingPlant_Rock_X",
-								"Evo III": "ED_ShootingPlant_Rock_X"
+								"On": "ED_ShootingPlant_Rock_X"
 							}							
 						],
 						"SandblastedCorridors": [
@@ -1896,12 +1915,10 @@
 							{
 								"Mutate": "Select",
 								"Select": {
-									"Var": "BaseDifficultySelection"
+									"Var": "Evolution_Switch"
 								},
 								"Default": "",
-								"Evo I": "ED_ShootingPlant_Rock_X",
-								"Evo II": "ED_ShootingPlant_Rock_X",
-								"Evo III": "ED_ShootingPlant_Rock_X"
+								"On": "ED_ShootingPlant_Rock_X"
 							}							
 						]
 					}
@@ -1912,7 +1929,20 @@
 				"ED_CaveLeech",
 				"ED_JellyBreeder",
 				"ED_PitJaw",
-				"ED_ShootingPlant"
+				"ED_ShootingPlant",
+				{
+					"Mutate": "ByBiome",
+					"Default": [],
+					"IceCaves": [
+						"ED_TentaclePlant"					
+					],
+					"MagmaCaves": [
+						"ED_TentaclePlant"					
+					],
+					"RadioactiveExclusionZone": [
+						"ED_TentaclePlant"
+					]
+				}
 			]
 		}
 	},	
@@ -1976,102 +2006,82 @@
 				"AlignDirectionSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"AlignToTargetMinRequiredAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"FleeSpeedBoostMultiplier": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5
+					"On": 1.5
 				},
 				"MaxAcceleration": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxBrakingDeceleration": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxPawnSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.15,
-					"Evo II": 1.15,
-					"Evo III": 1.15
+					"On": 1.15
 				},
 				"MaxSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxStrafeDistance": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MinSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"StrafeSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				}
 			},
 			"SpawnAmountModifier": {
@@ -2197,42 +2207,34 @@
 				"AlignDirectionSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"AlignToTargetMinRequiredAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"FleeSpeedBoostMultiplier": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5
+					"On": 1.5
 				},
 				"MaxAcceleration": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxBrakingDeceleration": {
 					"Mutate": "Select",
@@ -2240,49 +2242,39 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxPawnSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.25,
-					"Evo II": 1.25,
-					"Evo III": 1.25
+					"On": 1.25
 				},
 				"MaxSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxStrafeDistance": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MinSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"StrafeSpeed": {
 					"Mutate": "Select",
@@ -2290,9 +2282,7 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				}
 			},
 			"Resistances": {
@@ -2417,92 +2407,74 @@
 				"AlignDirectionSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"AlignToTargetMinRequiredAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"FleeSpeedBoostMultiplier": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5
+					"On": 1.5
 				},
 				"MaxAcceleration": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxBrakingDeceleration": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxPawnSpeed": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.05,
-					"Evo II": 1.05,
-					"Evo III": 1.05
+					"On": 1.05
 				},
 				"MaxSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MaxStrafeDistance": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"MinSlowdownAngle": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				},
 				"StrafeSpeed": {
 					"Mutate": "Select",
@@ -2510,9 +2482,7 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 1,
-					"Evo I": 1.1,
-					"Evo II": 1.1,
-					"Evo III": 1.1
+					"On": 1.1
 				}
 			},
 			"Resistances": {
@@ -2580,36 +2550,32 @@
 				"ED_Biome_Mactera_Shooter_Normal": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.6,
-					"Evo I": 0.55,
-					"Evo II": 0.55,
-					"Evo III": 0.55
+					"On": 0.55
 				},
 				"ED_Biome_Mactera_Shooter_HeavyVeteran": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.2
 				},
 				"ED_Biome_Mactera_TripleShooter": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.2
 				},
 				"ED_Biome_Mactera_QuintupleShooter": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0,
-					"Evo I": 0.05,
-					"Evo II": 0.05,
-					"Evo III": 0.05
+					"On": 0.05
 				}
 			},
 			"DifficultyRating": 45,
@@ -2716,36 +2682,32 @@
 				"ED_Biome_Mactera_Shooter_Amber": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.6,
-					"Evo I": 0.55,
-					"Evo II": 0.55,
-					"Evo III": 0.55
+					"On": 0.55
 				},
 				"ED_Biome_Mactera_Shooter_HeavyVeteran": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.2
 				},
 				"ED_Biome_Mactera_TripleShooter": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0.2
 				},
 				"ED_Biome_Mactera_QuintupleShooter": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0,
-					"Evo I": 0.05,
-					"Evo II": 0.05,
-					"Evo III": 0.05
+					"On": 0.05
 				}				
 			},
 			"DifficultyRating": 45,
@@ -5518,9 +5480,7 @@
 		},
 		"ED_Crawler_Spawner": {
 			"Base": "ED_FlyingSmartRock",
-			"DifficultyRating": {
-				"Var": "DifficultyRating_Special"
-			},
+			"DifficultyRating": 100,
 			"DisplayName": "Core Contact",
 			"DropResource": {
 				"Enable": true,
@@ -5531,9 +5491,9 @@
 			"HealthRaw": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
-					500,
 					700,
-					1050,
+					900,
+					1250,
 					1500
 				]
 			},
@@ -5612,22 +5572,18 @@
 				"ED_Grabber": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 1,
-					"Evo I": 0.8,
-					"Evo II": 0.8,
-					"Evo III": 0.8
+					"On": 0.8
 				},
 				"ED_Grabber_X": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": 0,
-					"Evo I": 0.2,
-					"Evo II": 0.2,
-					"Evo III": 0.2
+					"On": 0.2
 				}				
 			},
 			"CanBeUsedInEncounters": false,
@@ -5715,13 +5671,36 @@
 			"SpawnAmountModifier": {
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"Evo I": 0.1,
-				"Evo II": 0.1,
-				"Evo III": 0.1
-			}
+				"On": 0.1
+			},
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 35,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -100,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
 		},
 		"ED_Grabber_X": {
 			"Base": "ED_Grabber",
@@ -5824,7 +5803,32 @@
 				}
 			},
 			"Scale": 1.2,
-			"SpawnAmountModifier": 0.5			
+			"SpawnAmountModifier": 0.5,
+			"Temperature": {
+				"TemperatureChangeScale": {
+					"Var": "Temperature_Scale_Normal"
+				},
+				"BurnTemperature": {
+					"Mutate": "ByBiome",
+					"Default": 35,
+					"MagmaCaves": {
+						"Var": "Temperature_Burn_Normal"
+					}
+				},				
+				"FreezeTemperature": {
+					"Mutate": "ByBiome",
+					"Default": -100,
+					"IceCaves": {					
+						"Var": "Temperature_Freeze_Normal"
+					}
+				},
+				"DieIfBurning": {
+					"Var": "Temperature_BurnDie"
+				},				
+				"DieIfFrozen": {
+					"Var": "Temperature_FreezeDie"
+				}
+			}			
 		},
 		
 		"ED_JellyBreeder": {
@@ -6579,12 +6583,10 @@
 			"SpawnAmountModifier": {
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"Evo I": 0.1,				
-				"Evo II": 0.1,				
-				"Evo III": 0.1				
+				"On": 0.1				
 			}			
 		},
 		
@@ -6593,17 +6595,9 @@
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
-				"AzureWeald": [
-					"M_Biome_AzureWeald_Godetia1",
-					"M_Biome_AzureWeald_Flower_Orkidyellow",
-					"M_Biome_AzureWeald_Flower_Orkidyellow"
-				],
 				"DenseBiozone": [
 					"M_LushDownpour_CoralTongue",
 					"M_Biome_LushDownpour_PodPlants"
-				],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Roots"
 				],
 				"HollowBough": [
 					"M_StabberVine_Tell"
@@ -6701,24 +6695,18 @@
 			"Scale": 1.2			
 		},
 		"ED_ShootingPlant_Electric": {
-			"Base": "ED_ShootingPlant",
+			"Base": "ED_Biomes_ShootingPlant_Electric",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Voltballer",
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
-				"CrystalCaves": [
-					"M_Spider_Hoarder_Body02",
-					"",
-					""
-				],
 				"DenseBiozone": [
 					"M_LushDownpour_CoralTongue",
 					"M_Biome_LushDownpour_PodPlants",
 					"M_Biome_LushDownpour_PodPlants"
 				]
 			},
-			"Projectile": "PRJ_Biomes_ShootingPlant_Electric",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -6807,15 +6795,9 @@
 			"SpawnAmountModifier": 0.1
 		},
 		"ED_ShootingPlant_Fire": {
-			"Base": "ED_ShootingPlant",
+			"Base": "ED_Biomes_ShootingPlant_Fire",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Scorchballer",
-			"Materials": [
-				"M_Spider_Lobber_GlowBubbles",
-				"M_RivalBomb_ImpactBubbleRed",
-				"M_RivalBomb_ImpactBubbleRed"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Fire",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -6948,12 +6930,6 @@
 			"Base": "ED_Biomes_ShootingPlant_Ice",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Icefang Infector",
-			"Materials": [
-				"M_Spider_Tank_Armor_Ice",
-				"M_Flier_BomberIce_Flesh",
-				"M_Flier_BomberIce_Flesh"
-			],
-			"Projectile": "PRJ_Biomes_ShootingPlant_Ice",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -7086,7 +7062,6 @@
 			"Base": "ED_Biomes_ShootingPlant_Laser",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Laserballer",
-			"Projectile": "PRJ_Biomes_ShootingPlant_Laser",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -7172,9 +7147,6 @@
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Roots"
-				],
 				"HollowBough": [
 					"M_StabberVine_Tell"
 				]
@@ -7219,9 +7191,6 @@
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
-				"FungusBogs": [
-					"M_Hydra_Weed_Heart_Roots"
-				],
 				"HollowBough": [
 					"M_StabberVine_Tell"
 				]
@@ -7262,12 +7231,9 @@
 			"Scale": 1.2			
 		},
 		"ED_ShootingPlant_Rock": {
-			"Base": "ED_ShootingPlant",
+			"Base": "ED_Biomes_ShootingPlant_Rock",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Rockballer",
-			"Materials": [
-				"M_Spider_Lobber_GlowBubbles"
-			],
 			"Projectile": "PRJ_Biomes_ShootingPlant_Rock",
 			"Resistances": {
 				"ColdDamageMultiplier": {
@@ -7368,7 +7334,7 @@
 			"Scale": 1.2		
 		},
 		"ED_ShootingPlant_Void": {
-			"Base": "ED_ShootingPlant",
+			"Base": "ED_Biomes_ShootingPlant_Void",
 			"CanBeUsedInEncounters": true,
 			"DisplayName": "Abyssal Infector",
 			"Materials": [
@@ -9738,7 +9704,7 @@
 			"SpawnAmountModifier": 0.5
 		},
 		"ED_Spider_ExploderTank_Goo": {
-			"Base": "ED_Spider_ExploderTank",
+			"Base": "ED_Biomes_Spider_ExploderTank_Slime",
 			"DisplayName": "Slime Detonator",
 			"IsBossFight": true,
 			"Materials": [
@@ -9888,7 +9854,7 @@
 			"SpawnAmountModifier": 0.5			
 		},
 		"ED_Spider_ExploderTank_Goo_Small": {
-			"Base": "ED_Spider_ExploderTank",
+			"Base": "ED_Biomes_Spider_ExploderTank_Slime",
 			"DifficultyRating": {
 				"Var": "DifficultyRating_Bulk_Small"
 			},
@@ -10854,6 +10820,9 @@
 					"Var": "Resistance_Radiation"
 				}
 			},
+			"SpawnAmountModifier": {
+				"Var": "SpawnAmountModifier_Lobber"
+			},			
 			"Temperature": {
 				"TemperatureChangeScale": {
 					"Var": "Temperature_Scale_Normal"
@@ -12611,7 +12580,7 @@
 			},
 			"SpawnAmountModifier": 0.5
 		},
-		"ED_Spider_Shooter_EPC": {
+		"ED_Spider_Shooter_Void": {
 			"Base": "ED_Spider_Shooter",
 			"DifficultyRating": 55,
 			"DisplayName": "Glyphid Particle Shooter",
@@ -12619,7 +12588,7 @@
 				"M_Biome_AzureWeald_Flower_OrkidGreen",
 				"M_Biome_AzureWeald_Leaf_2"
 			],
-			"Projectile": "PRJ_Biomes_Mactera_Shooter_Void",
+			"Projectile": "PRJ_Spider_Shooter",
 			"Rarity": 4,
 			"Resistances": {
 				"ColdDamageMultiplier": {
@@ -12958,12 +12927,10 @@
 			"SpawnAmountModifier": {
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"Evo I": 0.1,				
-				"Evo II": 0.1,				
-				"Evo III": 0.1				
+				"On": 0.1				
 			}
 		},
 
@@ -15010,39 +14977,17 @@
 			}
 		},
 
-		"ED_TentaclePlant": {
-			"AttackDamageMultiplier": {
-				"Mutate": "ByBiome",
-				"Default": 1,
-				"IceCaves": 0.5,
-				"RadioactiveExclusionZone": 0.5
-			},
-			"CustomVeterans": {
-				"Mutate": "ByBiome",
-				"Default": "ED_TentaclePlant",
-				"MagmaCaves": "ED_Biomes_TentaclePlant_Fire"
-			},			
-			"Materials": {
-				"Mutate": "ByBiome",
-				"Default": [],
-				"RadioactiveExclusionZone": [
-					"M_DropPod_RampLightsNotBlinking",
-					"",
-					"M_SpaceRig_Metal02_LS"
-				]
-			},
-			"Projectile": {
-				"Mutate": "ByBiome",
-				"Default": "PRJ_TentaclePlant_New",
-				"IceCaves": "PRJ_Biomes_ShootingPlant_Ice",
-				"RadioactiveExclusionZone": "PRJ_Biomes_ShootingPlant_Laser"
-			},
+		"ED_Biomes_TentaclePlant_Fire": {
 			"Temperature": {
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
 					"Default": 30,
 					"MagmaCaves": 10000
-				},
+				}
+			}
+		},
+		"ED_Biomes_TentaclePlant_Ice": {
+			"Temperature": {				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
 					"Default": -30,
@@ -16201,26 +16146,6 @@
 			"HealthRaw": 100
 		}
 	},
-    "SpecialEncounters": [
-		{
-			"Enemy": "ED_Biomes_TentaclePlant_Fire",
-			"BaseChance": {
-				"Mutate": "ByBiome",
-				"Default": 0,
-				"MagmaCaves": 3
-			},
-			"CanSpawnInDeepDive": true
-		},
-		{
-			"Enemy": "ED_TentaclePlant",
-			"BaseChance": {
-				"Mutate": "ByBiome",
-				"Default": 3,
-				"MagmaCaves": 0
-			},
-			"CanSpawnInDeepDive": true
-		}	
-    ],	
 	"WaveSpawners": [
 		{
 			"Name": "Evolution Waves",
@@ -16229,35 +16154,14 @@
 				"Condition": {
 					"Mutate": "Select",
 					"Select": {
-						"Var": "BaseDifficultySelection"
+						"Var": "Evolution_Switch"
 					},
 					"Default": true,
-					"Hazard 4": {
-						"Var": "WaveSpawners_Biomes"
-					},					
-					"Hazard 5": {
-						"Var": "WaveSpawners_Biomes"
-					},					
-					"Hazard 6": {
-						"Var": "WaveSpawners_Biomes"
-					},					
-					"Hazard 7": {
-						"Var": "WaveSpawners_Biomes"
-					},					
-					"Hazard 8": {
-						"Var": "WaveSpawners_Biomes"
-					},					
-					"Hazard 9": {
-						"Var": "WaveSpawners_Biomes"
-					},
-					"Evo I": {
+					"On": {
 						"Var": "WaveSpawners_Evolution"
 					},
-					"Evo II": {
-						"Var": "WaveSpawners_Evolution"
-					},
-					"Evo III": {
-						"Var": "WaveSpawners_Evolution"
+					"Off": {
+						"Var": "WaveSpawners_Biomes"
 					}
 				},
 				"Then": false,
@@ -16306,20 +16210,11 @@
 					"Else": false
 				}
 			},
-			"Difficulty": {
-				"Mutate": "Select",
-				"Select": {
-					"Var": "BaseDifficultySelection"
-				},
-				"Default": 100,
-				"Evo I": 125,
-				"Evo II": 125,
-				"Evo III": 125
-			},
+			"Difficulty": 100,
 			"Interval": {
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": {
 					"Mutate": "ByPlayerCount",
@@ -16330,25 +16225,7 @@
 						90
 					]
 				},
-				"Evo I": {
-					"Mutate": "ByPlayerCount",
-					"Values": [
-						90,
-						75,
-						65,
-						60
-					]
-				},				
-				"Evo II": {
-					"Mutate": "ByPlayerCount",
-					"Values": [
-						90,
-						75,
-						65,
-						60
-					]
-				},
-				"Evo III": {
+				"On": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						90,
@@ -16390,7 +16267,7 @@
 						"ED_Grabber",
 						"ED_Spider_Exploder",
 						"ED_Spider_Tank",
-						"ED_Spider_Shooter_EPC",
+						"ED_Spider_Shooter_Void",
 						"ED_Spider_Stinger",
 						"ED_Spider_Buffer",
 						"ED_Spider_Swarmer",
@@ -16875,33 +16752,6 @@
 					2.4,
 					2.45			
 				]
-			},
-			"Evo I": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.2,
-					1.2,
-					1.4,
-					1.5					
-				]
-			},
-			"Evo II": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.4,
-					1.5,
-					1.6,
-					1.75			
-				]
-			},			
-			"Evo III": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.6,
-					1.8,
-					1.9,
-					2			
-				]
 			}
 		},
 		"EnemyDamageModifier": {
@@ -16963,372 +16813,91 @@
 					5.3,
 					5.6
 				]
-			},
-			"Evo I": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					3.3,
-					3.65,
-					3.9,
-					4.1		
-				]
-			},
-			"Evo II": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					3.8,
-					4.1,
-					4.4,
-					4.6
-				]
-			},			
-			"Evo III": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					4.3,
-					4.55,
-					4.9,
-					5.1
-				]
 			}
 		},
 		"EnemyCountModifier": {
 			"Mutate": "Multiply",
-			"Base Values": {
+			"A": {				
 				"Mutate": "Select",
 				"Select": {
 					"Var": "BaseDifficultySelection"
 				},
+				"Default": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1,
+						1,
+						1,
+						1
+					]
+				},				
+				"Hazard 4": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.5,
+						1.8,
+						2.3,
+						2.7				
+					]
+				},				
+				"Hazard 5": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.7,
+						2.05,
+						2.5,
+						3.0				
+					]
+				},				
+				"Hazard 6": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.9,
+						2.1,
+						2.7,
+						3.3				
+					]
+				},				
+				"Hazard 7": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						2.3,
+						2.5,
+						2.9,
+						3.5				
+					]
+				},
+				"Hazard 8": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						2.7,
+						2.9,
+						3.1,
+						3.7				
+					]
+				},				
+				"Hazard 9": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						2.9,
+						3.1,
+						3.5,
+						3.9				
+					]
+				}				
+			},
+			"B": {
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Evolution_Switch"
+				},
 				"Default": 1,
-				"Hazard 4": {			
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.5,
-							1.8,
-							2.3,
-							2.7
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.3,
-							1.6,
-							2.1,
-							2.5
-						]
-					}
-				},						
-				"Hazard 5": {	
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.7,
-							2.05,
-							2.5,
-							3.0
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.5,
-							1.85,
-							2.3,
-							2.8
-						]
-					}
-				},						
-				"Hazard 6": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.9,
-							2.1,
-							2.7,
-							3.3
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.7,
-							2.05,
-							2.5,
-							3.0
-						]
-					}
-				},				
-				"Hazard 7": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.3,
-							2.5,
-							2.9,
-							3.5
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							1.9,
-							2.1,
-							2.7,
-							3.3
-						]
-					}
-				},
-				"Hazard 8": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.7,
-							2.9,
-							3.1,
-							3.7
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.3,
-							2.5,
-							2.9,
-							3.5
-						]
-					}
-				},				
-				"Hazard 9": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.9,
-							3.1,
-							3.5,
-							3.9
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.7,
-							2.9,
-							3.1,
-							3.7
-						]
-					}
-				},
-				"Evo I": {
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.85,
-							3.15,
-							4.05,
-							4.95
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.55,
-							3.075,
-							3.75,
-							4.5
-						]
-					}
-				},
-				"Evo II": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							3.45,
-							3.75,
-							4.35,
-							5.25
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							2.85,
-							3.15,
-							4.05,
-							4.95
-						]
-					}
-				},				
-				"Evo III": {		
-					"Mutate": "ByBiome",
-					"Default": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							4.05,
-							4.35,
-							4.65,
-							5.55
-						]
-					},
-					"SandblastedCorridors": {
-						"Mutate": "ByPlayerCount",
-						"Values": [
-							3.45,
-							3.75,
-							4.35,
-							5.25
-						]
-					}
-				}
+				"On": 1.5
 			},
-			"Multiplicator A - During Extraction": {
-				"Mutate": "If",
-				"Condition": {
-					"Mutate": "DuringExtraction"
-				},
-				"Then": {
-					"Mutate": "ByMissionType",
-					"Default": 1.5,
-					"PE": 1.4,
-					"Sabotage": 1.8,
-					"Salvage": 1.1
-				},
-				"Else": 1
-			},
-			"Multiplicator B - During Egg/Drillevator": {
-				"Mutate": "If",
-				"Condition": {
-					"Mutate": "Or",
-					"A": {
-						"Mutate": "DuringEggAmbush",
-						"StartingAt": 5,
-						"StoppingAfter": 10
-					},
-					"B": {
-						"Mutate": "DuringDrillevator",
-						"StartingAt": 5,
-						"StoppingAfter": 300
-					}
-				},
-				"Then": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.95,
-					"Hazard 5": 2.675,
-					"Hazard 6": 2.425,
-					"Hazard 7": 2.2,
-					"Hazard 8": 2,
-					"Hazard 9": 1.8,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5
-				},
-				"Else": 1
-			},
-			"Multiplicator C - During Defend": {
-				"Mutate": "If",
-				"Condition": {
-					"Mutate": "DuringDefend",
-					"StartingAt": 5,
-					"StoppingAfter": 180
-				},
-				"Then": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.25,
-					"Hazard 5": 1.975,
-					"Hazard 6": 1.725,
-					"Hazard 7": 1.5,
-					"Hazard 8": 1.3,
-					"Hazard 9": 1.1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5					
-				},
-				"Else": 1
-			},
-			"Multiplicator D - Escort": {
-				"Mutate": "ByEscortPhase",
+			"C": {
+				"Mutate": "ByBiome",
 				"Default": 1,
-				"FinalEventA": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.25,
-					"Hazard 5": 1.975,
-					"Hazard 6": 1.725,
-					"Hazard 7": 1.5,
-					"Hazard 8": 1.3,
-					"Hazard 9": 1.1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5						
-				},
-				"FinalEventB": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.25,
-					"Hazard 5": 1.975,
-					"Hazard 6": 1.725,
-					"Hazard 7": 1.5,
-					"Hazard 8": 1.3,
-					"Hazard 9": 1.1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5						
-				},
-				"FinalEventC": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.25,
-					"Hazard 5": 1.975,
-					"Hazard 6": 1.725,
-					"Hazard 7": 1.5,
-					"Hazard 8": 1.3,
-					"Hazard 9": 1.1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5						
-				},
-				"FinalEventD": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
-					},
-					"Default": 1,
-					"Hazard 4": 2.25,
-					"Hazard 5": 1.975,
-					"Hazard 6": 1.725,
-					"Hazard 7": 1.5,
-					"Hazard 8": 1.3,
-					"Hazard 9": 1.1,
-					"Evo I": 1.5,
-					"Evo II": 1.5,
-					"Evo III": 1.5						
-				}
+				"SandblastedCorridors": 0.75
 			}
 		},	
 		"EncounterDifficulty": [
@@ -17345,10 +16914,7 @@
 					"Hazard 6": 550,
 					"Hazard 7": 550,
 					"Hazard 8": 650,
-					"Hazard 9": 650,
-					"Evo I": 550,
-					"Evo II": 550,
-					"Evo III": 650
+					"Hazard 9": 650
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17361,10 +16927,7 @@
 					"Hazard 6": 650,
 					"Hazard 7": 700,
 					"Hazard 8": 700,
-					"Hazard 9": 750,
-					"Evo I": 650,
-					"Evo II": 700,
-					"Evo III": 700
+					"Hazard 9": 750
 				}
 			},
 			{
@@ -17380,10 +16943,7 @@
 					"Hazard 6": 450,
 					"Hazard 7": 550,
 					"Hazard 8": 550,
-					"Hazard 9": 650,
-					"Evo I": 450,
-					"Evo II": 550,
-					"Evo III": 550
+					"Hazard 9": 650
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17396,10 +16956,7 @@
 					"Hazard 6": 750,
 					"Hazard 7": 750,
 					"Hazard 8": 850,
-					"Hazard 9": 850,
-					"Evo I": 750,
-					"Evo II": 750,
-					"Evo III": 850
+					"Hazard 9": 850
 				}
 			},
 			{
@@ -17448,10 +17005,7 @@
 						"Hazard 6": 350,	
 						"Hazard 7": 450,						
 						"Hazard 8": 550,						
-						"Hazard 9": 650,
-						"Evo I": 525,
-						"Evo II": 675,						
-						"Evo III": 825
+						"Hazard 9": 650
 					},
 					"Multiplicator": {
 						"Mutate": "ByDNA",
@@ -17489,10 +17043,7 @@
 						"Hazard 6": 450,	
 						"Hazard 7": 600,						
 						"Hazard 8": 750,						
-						"Hazard 9": 900,
-						"Evo I": 675,
-						"Evo II": 900,						
-						"Evo III": 1125
+						"Hazard 9": 900
 					},					
 					"Multiplicator": {
 						"Mutate": "ByDNA",
@@ -17517,10 +17068,7 @@
 					"Hazard 6": 125,
 					"Hazard 7": 120,					
 					"Hazard 8": 120,
-					"Hazard 9": 110,
-					"Evo I": 125,
-					"Evo II": 120,
-					"Evo III": 120
+					"Hazard 9": 110
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17533,10 +17081,7 @@
 					"Hazard 6": 165,
 					"Hazard 7": 150,					
 					"Hazard 8": 130,
-					"Hazard 9": 125,
-					"Evo I": 165,
-					"Evo II": 150,
-					"Evo III": 130
+					"Hazard 9": 125
 				}
 			}
 		],
@@ -17554,10 +17099,7 @@
 					"Hazard 6": 170,
 					"Hazard 7": 160,					
 					"Hazard 8": 150,
-					"Hazard 9": 140,
-					"Evo I": 170,
-					"Evo II": 160,
-					"Evo III": 150
+					"Hazard 9": 140
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17570,10 +17112,7 @@
 					"Hazard 6": 210,
 					"Hazard 7": 200,
 					"Hazard 8": 190,
-					"Hazard 9": 180,
-					"Evo I": 210,
-					"Evo II": 200,
-					"Evo III": 190
+					"Hazard 9": 180
 				}
 			},
 			{
@@ -17596,10 +17135,7 @@
 					"Hazard 6": 550,
 					"Hazard 7": 650,					
 					"Hazard 8": 750,
-					"Hazard 9": 850,
-					"Evo I": 550,
-					"Evo II": 650,
-					"Evo III": 750
+					"Hazard 9": 850
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17612,10 +17148,7 @@
 					"Hazard 6": 650,
 					"Hazard 7": 750,					
 					"Hazard 8": 850,
-					"Hazard 9": 950,
-					"Evo I": 650,
-					"Evo II": 750,
-					"Evo III": 850
+					"Hazard 9": 950
 				}
 			}
 		],
@@ -17623,63 +17156,95 @@
 			{
 				"weight": 2,
 				"min": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
+					"Mutate": "Multiply",
+					"A": {						
+						"Mutate": "Select",
+						"Select": {
+							"Var": "BaseDifficultySelection"
+						},
+						"Default": 4,
+						"Hazard 6": 4,
+						"Hazard 7": 5,					
+						"Hazard 8": 6,
+						"Hazard 9": 7
 					},
-					"Default": 4,
-					"Hazard 6": 4,
-					"Hazard 7": 5,					
-					"Hazard 8": 6,
-					"Hazard 9": 7,					
-					"Evo I": 6,
-					"Evo II": 7,
-					"Evo III": 9
+					"B": {
+						"Mutate": "Select",
+						"Select": {
+							"Var": "Evolution_Switch"
+						},
+						"Default": 1,
+						"On": 1.5
+					}
 				},
 				"max": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
+					"Mutate": "Multiply",
+					"A": {						
+						"Mutate": "Select",
+						"Select": {
+							"Var": "BaseDifficultySelection"
+						},
+						"Default": 6,
+						"Hazard 6": 5,
+						"Hazard 7": 6,					
+						"Hazard 8": 7,
+						"Hazard 9": 8
 					},
-					"Default": 6,
-					"Hazard 6": 5,
-					"Hazard 7": 6,					
-					"Hazard 8": 7,
-					"Hazard 9": 8,					
-					"Evo I": 7,
-					"Evo II": 9,
-					"Evo III": 11
+					"B": {
+						"Mutate": "Select",
+						"Select": {
+							"Var": "Evolution_Switch"
+						},
+						"Default": 1,
+						"On": 1.5
+					}
 				}
 			},
 			{
-				"weight": 8,
+				"weight": 8,				
 				"min": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
+					"Mutate": "Multiply",
+					"A": {						
+						"Mutate": "Select",
+						"Select": {
+							"Var": "BaseDifficultySelection"
+						},
+						"Default": 7,
+						"Hazard 6": 6,
+						"Hazard 7": 7,					
+						"Hazard 8": 8,
+						"Hazard 9": 9
 					},
-					"Default": 7,
-					"Hazard 6": 6,
-					"Hazard 7": 7,					
-					"Hazard 8": 8,
-					"Hazard 9": 9,					
-					"Evo I": 9,
-					"Evo II": 10,
-					"Evo III": 12
+					"B": {
+						"Mutate": "Select",
+						"Select": {
+							"Var": "Evolution_Switch"
+						},
+						"Default": 1,
+						"On": 1.5
+					}						
 				},
 				"max": {
-					"Mutate": "Select",
-					"Select": {
-						"Var": "BaseDifficultySelection"
+					"Mutate": "Multiply",
+					"A": {					
+						"Mutate": "Select",
+						"Select": {
+							"Var": "BaseDifficultySelection"
+						},
+						"Default": 7,
+						"Hazard 6": 7,
+						"Hazard 7": 8,					
+						"Hazard 8": 9,
+						"Hazard 9": 10
 					},
-					"Default": 7,
-					"Hazard 6": 7,
-					"Hazard 7": 8,					
-					"Hazard 8": 9,
-					"Hazard 9": 10,					
-					"Evo I": 10,
-					"Evo II": 12,
-					"Evo III": 15
+					"B": {
+						"Mutate": "Select",
+						"Select": {
+							"Var": "Evolution_Switch"
+						},
+						"Default": 1,
+						"On": 1.5
+					}					
 				}
 			}
 		],
@@ -17715,10 +17280,7 @@
 			"Hazard 6": 1.25,
 			"Hazard 7": 1.35,
 			"Hazard 8": 1.45,
-			"Hazard 9": 1.55,
-			"Evo I": 1.25,
-			"Evo II": 1.35,
-			"Evo III": 1.45
+			"Hazard 9": 1.55
 		},
 		"AttackCooldownModifier": {
 			"Mutate": "Select",
@@ -17731,10 +17293,7 @@
 			"Hazard 6": 1.75,
 			"Hazard 7": 2,
 			"Hazard 8": 2.25,
-			"Hazard 9": 2.5,
-			"Evo I": 1.75,
-			"Evo II": 2,
-			"Evo III": 2.25
+			"Hazard 9": 2.5
 		},
 		"ProjectileSpeedModifier": {
 			"Mutate": "Select",
@@ -17747,10 +17306,7 @@
 			"Hazard 6": 1.9,
 			"Hazard 7": 2.1,
 			"Hazard 8": 2.3,
-			"Hazard 9": 2.5,
-			"Evo I": 1.9,
-			"Evo II": 2.1,
-			"Evo III": 2.3			
+			"Hazard 9": 2.5			
 		},
 		"HealthRegenerationMax": 0.4,
 		"ReviveHealthRatio": 0.4			
@@ -17775,10 +17331,7 @@
 					"Hazard 6": 40,
 					"Hazard 7": 40,
 					"Hazard 8": 40,
-					"Hazard 9": 0,
-					"Evo I": 40,
-					"Evo II": 40,
-					"Evo III": 40
+					"Hazard 9": 0
 				},
 				"Else": {
 					"Mutate": "Select",
@@ -17791,10 +17344,7 @@
 					"Hazard 6": 60,
 					"Hazard 7": 50,
 					"Hazard 8": 40,
-					"Hazard 9": 40,
-					"Evo I": 60,
-					"Evo II": 50,
-					"Evo III": 40
+					"Hazard 9": 40
 				}
 			},
 			"Salvage": {
@@ -17814,10 +17364,7 @@
 					"Hazard 6": 20,
 					"Hazard 7": 10,
 					"Hazard 8": 0,
-					"Hazard 9": 0,
-					"Evo I": 20,
-					"Evo II": 10,
-					"Evo III": 0
+					"Hazard 9": 0
 				},
 				"Else": {
 					"Mutate": "Select",
@@ -17830,10 +17377,7 @@
 					"Hazard 6": 60,
 					"Hazard 7": 50,
 					"Hazard 8": 40,
-					"Hazard 9": 40,
-					"Evo I": 60,
-					"Evo II": 50,
-					"Evo III": 40
+					"Hazard 9": 40
 				}
 			}
 		}
@@ -17848,32 +17392,26 @@
 			{
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 90,
-				"Evo I": 180,
-				"Evo II": 180,
-				"Evo III": 180
+				"On": 180
 			},
 			{
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 120,
-				"Evo I": 240,
-				"Evo II": 240,
-				"Evo III": 240
+				"On": 240
 			},
 			{
 				"Mutate": "Select",
 				"Select": {
-					"Var": "BaseDifficultySelection"
+					"Var": "Evolution_Switch"
 				},
 				"Default": 180,
-				"Evo I": 360,
-				"Evo II": 360,
-				"Evo III": 360
+				"On": 360
 			},
 			{
 				"Mutate": "Select",
@@ -17881,9 +17419,7 @@
 					"Var": "BaseDifficultySelection"
 				},
 				"Default": 240,
-				"Evo I": 480,
-				"Evo II": 480,
-				"Evo III": 480
+				"On": 480
 			}
 		]
 	},
@@ -17929,26 +17465,15 @@
 	"NitraMultiplier": {
 		"Mutate": "Select",
 		"Select": {
-			"Var": "BaseDifficultySelection"
+			"Var": "Evolution_Switch"
 		},
 		"Default": 1,
 		"Evo I": {
 			"Mutate": "ByDNA",
 			"Default": 1.2,
+			"Salvage": 1.3,
 			"Mining,2,1": 1.5,
 			"Sabotage": 1.5
-		},		
-		"Evo II": {
-			"Mutate": "ByDNA",
-			"Default": 1.35,
-			"Mining,2,1": 1.65,
-			"Sabotage": 1.65
-		},
-		"Evo III": {
-			"Mutate": "ByDNA",
-			"Default": 1.5,
-			"Mining,2,1": 1.8,
-			"Sabotage": 1.8
 		}		
 	},
 	"Messages": [
@@ -17975,15 +17500,12 @@
 								"Var": "BaseDifficultySelection"
 							},
 							"Default": "",
-							"Hazard 4": "|    Version:         Hazard 4x2                                                                                       ",
-							"Hazard 5": "|    Version:         Hazard 5x2                                                                                       ",
-							"Hazard 6": "|    Version:         Hazard 6x2                                                                                       ",
-							"Hazard 7": "|    Version:         Hazard 7x2                                                                                       ",					
-							"Hazard 8": "|    Version:         Hazard 8x2                                                                                       ",
-							"Hazard 9": "|    Version:         Hazard 9x2                                                                                       ",
-							"Evo I": "|    Version:         Evolution I                                                                                                ",							
-							"Evo II": "|    Version:         Evolution II                                                                                               ",
-							"Evo III": "|    Version:         Evolution III                                                                                              "
+							"Hazard 4": "|                Base:         Hazard 4x2                                                                                    ",
+							"Hazard 5": "|                Base:         Hazard 5x2                                                                                    ",
+							"Hazard 6": "|                Base:         Hazard 6x2                                                                                    ",
+							"Hazard 7": "|                Base:         Hazard 7x2                                                                                    ",					
+							"Hazard 8": "|                Base:         Hazard 8x2                                                                                    ",
+							"Hazard 9": "|                Base:         Hazard 9x2                                                                                    "
 						},
 						"Else": ""
 					},
@@ -17999,11 +17521,31 @@
 						"Then": {
 							"Mutate": "Select",
 							"Select": {
+								"Var": "Evolution_Switch"
+							},
+							"Default": "",
+							"on": "|        Evolution:         on                                                                                            ",
+							"off": "|       Evolution:         off                                                                                     "                                                                                          
+						},
+						"Else": ""
+					},					
+					{
+						"Mutate": "IfFloat",
+						"Value": {
+							"Mutate": "Countdown",
+							"Start": 2,
+							"Stop": 0,
+							"Enable": true
+						},
+						"==": 0,
+						"Then": {
+							"Mutate": "Select",
+							"Select": {
 								"Var": "Resistance_Switch"
 							},
 							"Default": "",
-							"on": "|    Resistances:         on                                                                                        ",
-							"off": "|    Resistances:         off                                                                                     "                                                                                          
+							"on": "|   Resistances:         on                                                                                        ",
+							"off": "|   Resistances:         off                                                                                     "                                                                                          
 						},
 						"Else": ""
 					},					
@@ -18070,10 +17612,7 @@
 							"Hazard 6": 40,
 							"Hazard 7": 40,
 							"Hazard 8": 40,
-							"Hazard 9": 0,
-							"Evo I": 40,
-							"Evo II": 40,
-							"Evo III": 40
+							"Hazard 9": 0
 						},
 						"Salvage": {
 							"Mutate": "Select",
@@ -18086,10 +17625,7 @@
 							"Hazard 6": 20,
 							"Hazard 7": 10,
 							"Hazard 8": 0,
-							"Hazard 9": 0,
-							"Evo I": 20,
-							"Evo II": 10,
-							"Evo III": 0
+							"Hazard 9": 0
 						}
 					},					
 					"Then": true,
@@ -18114,10 +17650,7 @@
 							"Hazard 6": 60,
 							"Hazard 7": 50,
 							"Hazard 8": 40,
-							"Hazard 9": 40,
-							"Evo I": 60,
-							"Evo II": 50,
-							"Evo III": 40
+							"Hazard 9": 40
 						},
 						"Salvage": {
 							"Mutate": "Select",
@@ -18130,10 +17663,7 @@
 							"Hazard 6": 60,
 							"Hazard 7": 50,
 							"Hazard 8": 40,
-							"Hazard 9": 40,
-							"Evo I": 60,
-							"Evo II": 50,
-							"Evo III": 40
+							"Hazard 9": 40
 						}
 					},					
 					"Then": true,

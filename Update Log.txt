@@ -1,0 +1,43 @@
+Update_145: 
+
+- lowered Difficulty of Extra Waves from 150 to 125
+- lowered initial time for Extra Waves to occur (~ a quarter of the time before)
+- adjusted intervals of core contact
+- lowered amount of nitra spawn by 15% (Evo series)
+- adjusted Mini Bulk spawns
+- removed movement speed bonus of several enemies (stingtail, web shooter, acid spitter, spreader, swarmer, core spawn)
+- adjusted Messages
+- added evolved opressors (Evo series)
+
+Update_146:
+
+- lowered distance of Phantom kill switch
+
+Update [147]:
+
+- lowered swarmer spawns by half (Evo only)
+- added Fire Bramble in Magma Caves (pak)
+- added Woodlouse variant for Azure Weald
+- added Arbalest variant for Azure Weald
+- lowered the damage done by vanilla Fire Bombers
+- added another kill switch to Ghosts (in the rare case they survive the first two)
+- set distance kill switch back to 45 m
+
+Update [148]:
+
+- added new Magical Bombers in Azure Weald (pak)
+
+Update [149]:
+
+- added new Ice Bramble in Glacial Strata (pak)
+- added new Laser Bramble in REZ (pak)
+- added new Slime Bulks in Fungus Bungus (pak)
+- introduced temperature system for Grabbers in Magma and Ice biome
+- adjusted temperature System for Glacial Strata
+- upped the nitra ocurrence by (10/10/15)% (Evo only)
+- rebalanced the difficulties, esp Evolution
+- reduced Spreader spawns (Evo only)
+
+Update [150]:
+
+- added a switch for Evolution

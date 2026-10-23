@@ -42,32 +42,32 @@
 	|  Radi:  |    ----    |    ----    |    -100    |    ----    |    ----    |    ----         |
 	|  Temp:  |    Cold    |            |            |            |            |    Fire         |
 	|_________|____________|____________|____________|____________|____________|_________________|
+	|                      |                                                                     |
+	|  Base Difficulty:    |  Description:                                                       |
+	|                      |                                                                     |
+	|     Hazard 4x2       |             --- Scaled Hazards ---                                  |
+	|     Hazard 5x2       |                                                                     |
+	|     Hazard 6x2       |  - Scaled Difficulty Settings                                       |
+	|     Hazard 7x2       |  - x2 amount of enemies                                             |
+	|     Hazard 8x2       |                                                                     |
+	|     Hazard 9x2       |                                                                     |
+	|                      |                                                                     |
+	|                      |                                                                     |
+	|                      |             --- Evolution Edition ---                               |
+	|                      |  - stronger, bigger and faster enemy variants                       |
+	|                      |  - 3x amount of enemies                                             |
+	|                      |  - intense extra waves                                              |
+	|                      |  - bigger swarms during defend (uplink/refuel), eggs and            |
+	|                      |    drillevator                                                      |
+	|                      |  - grunts on steroids                                               |
+	|                      |                                                                     |
+	|                      |                                                                     |
+	|______________________|_____________________________________________________________________|
 	|                                                                                            |
-	|  Difficulty List:              Description:                                                |
-	|                          _                                                                 |
-	|     Hazard 4              |                                                                |
-	|     Hazard 5              |                                                                |
-	|     Hazard 6              |->  Scaled Hazards, x2 amount of enemies                        |
-	|     Hazard 7              |                                                                |
-	|     Hazard 8              |                                                                |
-	|     Hazard 9             _|                                                                |
-	|                                                                                            |
-	|                          _                                                                 |
-	|                           |    Evolution Edition with stronger enemy variants,             |
-	|                           |    3x amount of enemies, intense extra waves                   |
-	|      Evo I                |                                                                |
-	|      Evo II               |->  I:   Haz 6 Difficulty Values with Haz 5 bug resistances     |
-	|      Evo III              |    II:  Haz 7 Difficulty Values with Haz 6 bug resistances     |
-	|                           |    III: Haz 8 Difficulty Values with Haz 7 bug resistances     |
-	|                          _|                                                                |
-	|                                                                                            |
-	|                                                                                            |
-	|____________________________________________________________________________________________|
-	|                                                                                            |
-	|  To select the difficulty / turn resistances on or off:                                    |
+	|  To select the difficulty / turn Resistances / Evolution Version on or off:                |
 	|                                                                                            |
 	|    -> BaseDifficultySelection -> 'Value' -> Type in Difficulty from the List above         |
-	|                                           'Hazard #' or 'Evo I', 'Evo II', 'Evo III'       |
+	|                                             'Hazard #x2'                                   |
 	|                                                                                            |
 	|    -> Evolution_Switch        -> 'Value' -> type in 'on' or 'off'                          |
 	|                                                                                            |
@@ -90,15 +90,15 @@
 	"Vars": {
 		"BaseDifficultySelection": {
 			"Type": "String",
-			"Value": "Hazard 6"
-		},
-		"Resistance_Switch": {
-			"Type": "String",
-			"Value": "On"			
+			"Value": "Hazard 6x2"
 		},
 		"Evolution_Switch": {
 			"Type": "String",
 			"Value": "On"
+		},
+		"Resistance_Switch": {
+			"Type": "String",
+			"Value": "On"			
 		},
 		"Bulk2ndPhase_Movement": {
 			"Type": "Float",
@@ -282,10 +282,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 120,
-					"Hazard 6": 200,
-					"Hazard 7": 225,
-					"Hazard 8": 250,
-					"Hazard 9": 275
+					"Hazard 6x2": 200,
+					"Hazard 7x2": 225,
+					"Hazard 8x2": 250,
+					"Hazard 9x2": 275
 				},
 				"B": {
 					"Mutate": "Select",
@@ -307,10 +307,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 100,
-					"Hazard 6": 100,
-					"Hazard 7": 120,
-					"Hazard 8": 140,
-					"Hazard 9": 160
+					"Hazard 6x2": 100,
+					"Hazard 7x2": 120,
+					"Hazard 8x2": 140,
+					"Hazard 9x2": 160
 				},
 				"B": {
 					"Mutate": "Select",
@@ -332,10 +332,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 120,
-					"Hazard 6": 140,
-					"Hazard 7": 160,
-					"Hazard 8": 180,
-					"Hazard 9": 200
+					"Hazard 6x2": 140,
+					"Hazard 7x2": 160,
+					"Hazard 8x2": 180,
+					"Hazard 9x2": 200
 				},
 				"B": {
 					"Mutate": "Select",
@@ -1073,7 +1073,7 @@
 					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"On": 0.25
+				"On": 0.1
 			}				
 		},		
 		"SpawnAmountModifier_Woodlouse": {
@@ -1084,7 +1084,7 @@
 					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"On": 0.2
+				"On": 0.25
 			}				
 		},		
 		"SpawnAmountModifier_Lobber": {
@@ -1095,7 +1095,7 @@
 					"Var": "Evolution_Switch"
 				},
 				"Default": 0.5,
-				"On": 0.2
+				"On": 0.25
 			}				
 		},
 		"Temperature_BurnDie": {
@@ -1663,10 +1663,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 4,
-					"Hazard 6": 5,
-					"Hazard 7": 7,
-					"Hazard 8": 9,
-					"Hazard 9": 11
+					"Hazard 6x2": 5,
+					"Hazard 7x2": 7,
+					"Hazard 8x2": 9,
+					"Hazard 9x2": 11
 				},
 				"B": {
 					"Mutate": "Select",
@@ -1685,10 +1685,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 6,
-					"Hazard 6": 7,
-					"Hazard 7": 9,
-					"Hazard 8": 11,
-					"Hazard 9": 13
+					"Hazard 6x2": 7,
+					"Hazard 7x2": 9,
+					"Hazard 8x2": 11,
+					"Hazard 9x2": 13
 				},
 				"B": {
 					"Mutate": "Select",
@@ -1709,10 +1709,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 2,
-					"Hazard 6": 6,
-					"Hazard 7": 6,
-					"Hazard 8": 6,
-					"Hazard 9": 6
+					"Hazard 6x2": 6,
+					"Hazard 7x2": 6,
+					"Hazard 8x2": 6,
+					"Hazard 9x2": 6
 				},
 				"B": {
 					"Mutate": "Select",
@@ -1731,10 +1731,10 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 2,
-					"Hazard 6": 6,
-					"Hazard 7": 6,
-					"Hazard 8": 6,
-					"Hazard 9": 6
+					"Hazard 6x2": 6,
+					"Hazard 7x2": 6,
+					"Hazard 8x2": 6,
+					"Hazard 9x2": 6
 				},
 				"B": {
 					"Mutate": "Select",
@@ -5415,10 +5415,6 @@
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 110,
 			"HealthRaw": 140,
-			"Materials": [
-				"",
-				"M_BeachParty_Lantern_Blue"
-			],
 			"Rarity": 3,
 			"Resistances": {
 				"ColdDamageMultiplier": {
@@ -11510,8 +11506,8 @@
 			"DifficultyRating": 95,
 			"DisplayName": "Evolved Frost Menace",
 			"Materials": [
-				"",
-				"",
+				"M_Spider_RapidShooter_Body",
+				"M_Spider_Tank_Armor_Ice",
 				"M_Biome_IceCaves_Ice01",
 				"M_Biome_IceCaves_Ice01"
 			],			
@@ -14687,13 +14683,14 @@
 			"Projectile": {
 				"Mutate": "ByBiome",
 				"Default": "PRJ_HydraWeed_Shooter",
-				"AzureWeald": "PRJ_ChargedBlasterShot",
-				"CrystalCaves": "PRJ_Spider_RapidShooter_electric_C",
-				"DenseBiozone": "PRJ_Spider_RapidShooter_electric_C",
-				"IceCaves": "PRJ_Spider_RapidShooter_ice_C",
-				"MagmaCaves": "PRJ_Spider_Boss_Twin_Multifireball",
-				"RadioactiveExclusionZone": "PRJ_Base_Spider_Lobber_Projectile",
-				"SaltCaves": "PRJ_Base_Spider_Lobber_Projectile"
+				"AzureWeald": "PRJ_Spider_RapidShooter_TCF",
+				"CrystalCaves": "PRJ_Biomes_Sprout_Electric",
+				"DenseBiozone": "PRJ_Biomes_Sprout_Electric",
+				"IceCaves": "PRJ_Biomes_Sprout_Ice",
+				"MagmaCaves": "PRJ_Biomes_Sprout_Fire",
+				"RadioactiveExclusionZone": "PRJ_Biomes_Sprout_Laser",
+				"SaltCaves": "PRJ_Biomes_Sprout_Rock",
+				"SandblastedCorridors": "PRJ_Biomes_Sprout_Rock"
 			},
 			"Rarity": 3,
 			"Resistances": {
@@ -14803,12 +14800,13 @@
 				"Mutate": "ByBiome",
 				"Default": "PRJ_HydraWeed_Shooter",
 				"AzureWeald": "PRJ_Spider_RapidShooter_TCF",
-				"CrystalCaves": "PRJ_Spider_RapidShooter_electric_C",
-				"DenseBiozone": "PRJ_Spider_RapidShooter_electric_C",
-				"IceCaves": "PRJ_Spider_RapidShooter_ice_C",
-				"MagmaCaves": "PRJ_Spider_Boss_Twin_Multifireball",
-				"RadioactiveExclusionZone": "PRJ_Base_Spider_Lobber_Projectile",
-				"SaltCaves": "PRJ_Base_Spider_Lobber_Projectile"
+				"CrystalCaves": "PRJ_Biomes_Sprout_Electric",
+				"DenseBiozone": "PRJ_Biomes_Sprout_Electric",
+				"IceCaves": "PRJ_Biomes_Sprout_Ice",
+				"MagmaCaves": "PRJ_Biomes_Sprout_Fire",
+				"RadioactiveExclusionZone": "PRJ_Biomes_Sprout_Laser",
+				"SaltCaves": "PRJ_Biomes_Sprout_Rock",
+				"SandblastedCorridors": "PRJ_Biomes_Sprout_Rock"
 			},
 			"Rarity": 3,
 			"Resistances": {
@@ -14917,13 +14915,14 @@
 			"Projectile": {
 				"Mutate": "ByBiome",
 				"Default": "PRJ_HydraWeed_Shooter",
-				"AzureWeald": "PRJ_ChargedBlasterShot",
-				"CrystalCaves": "PRJ_Spider_RapidShooter_electric_C",
-				"DenseBiozone": "PRJ_Spider_RapidShooter_electric_C",
-				"IceCaves": "PRJ_Spider_RapidShooter_ice_C",
-				"MagmaCaves": "PRJ_Spider_Boss_Twin_Multifireball",
-				"RadioactiveExclusionZone": "PRJ_Base_Spider_Lobber_Projectile",
-				"SaltCaves": "PRJ_Base_Spider_Lobber_Projectile"
+				"AzureWeald": "PRJ_Spider_RapidShooter_TCF",
+				"CrystalCaves": "PRJ_Biomes_Sprout_Electric",
+				"DenseBiozone": "PRJ_Biomes_Sprout_Electric",
+				"IceCaves": "PRJ_Biomes_Sprout_Ice",
+				"MagmaCaves": "PRJ_Biomes_Sprout_Fire",
+				"RadioactiveExclusionZone": "PRJ_Biomes_Sprout_Laser",
+				"SaltCaves": "PRJ_Biomes_Sprout_Rock",
+				"SandblastedCorridors": "PRJ_Biomes_Sprout_Rock"
 			},
 			"Rarity": 3,
 			"Resistances": {
@@ -16228,9 +16227,9 @@
 				"On": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
+						120,
 						90,
 						75,
-						65,
 						60
 					]
 				}					
@@ -16668,7 +16667,7 @@
 		}		
 	],
 	"DifficultySetting": {
-		"BaseHazard": "Hazard 5",
+		"BaseHazard": "Hazard 5x2",
 		"ExtraLargeEnemyDamageResistance": [
 			1,
 			1.3,
@@ -16694,64 +16693,75 @@
 			1.9
 		],
 		"EnemyDamageResistance": {
-			"Mutate": "Select",
-			"Select": {
-				"Var": "BaseDifficultySelection"
+			"Mutate": "Multiply",
+			"A": {
+				"Mutate": "Select",
+				"Select": {
+					"Var": "BaseDifficultySelection"
+				},
+				"Default": 1,
+				"Hazard 4x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [			
+						1.0,
+						1.0,
+						1.2,
+						1.3
+					]
+				},
+				"Hazard 5x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.2,
+						1.2,
+						1.4,
+						1.5					
+					]
+				},				
+				"Hazard 6x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.4,
+						1.5,
+						1.6,
+						1.75			
+					]
+				},
+				"Hazard 7x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.6,
+						1.8,
+						1.9,
+						2
+					]
+				},
+				"Hazard 8x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						1.8,
+						2.1,
+						2.2,
+						2.25			
+					]
+				},			
+				"Hazard 9x2": {
+					"Mutate": "ByPlayerCount",
+					"Values": [
+						2,
+						2.2,
+						2.4,
+						2.45			
+					]
+				}
 			},
-			"Default": 1,
-			"Hazard 4": {
-				"Mutate": "ByPlayerCount",
-				"Values": [			
-					1.0,
-					1.0,
-					1.2,
-					1.3
-				]
-			},
-			"Hazard 5": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.2,
-					1.2,
-					1.4,
-					1.5					
-				]
-			},				
-			"Hazard 6": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.4,
-					1.5,
-					1.6,
-					1.75			
-				]
-			},
-			"Hazard 7": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.6,
-					1.8,
-					1.9,
-					2
-				]
-			},
-			"Hazard 8": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					1.8,
-					2.1,
-					2.2,
-					2.25			
-				]
-			},			
-			"Hazard 9": {
-				"Mutate": "ByPlayerCount",
-				"Values": [
-					2,
-					2.2,
-					2.4,
-					2.45			
-				]
+			"B": {
+				"Mutate": "Select",
+				"Select": {
+					"Var": "Evolution_Switch"
+				},
+				"Default": 1,
+				"On": 0.85				
 			}
 		},
 		"EnemyDamageModifier": {
@@ -16760,7 +16770,7 @@
 				"Var": "BaseDifficultySelection"
 			},
 			"Default": 1,
-			"Hazard 4": {
+			"Hazard 4x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [			
 					2.0,
@@ -16769,7 +16779,7 @@
 					2.5
 				]
 			},
-			"Hazard 5": {
+			"Hazard 5x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
 					2.8,
@@ -16778,7 +16788,7 @@
 					3.4				
 				]
 			},				
-			"Hazard 6": {
+			"Hazard 6x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
 					3.3,
@@ -16787,7 +16797,7 @@
 					4.1		
 				]
 			},
-			"Hazard 7": {
+			"Hazard 7x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
 					3.8,
@@ -16796,7 +16806,7 @@
 					4.6
 				]
 			},
-			"Hazard 8": {
+			"Hazard 8x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
 					4.3,
@@ -16805,7 +16815,7 @@
 					5.1
 				]
 			},			
-			"Hazard 9": {
+			"Hazard 9x2": {
 				"Mutate": "ByPlayerCount",
 				"Values": [
 					4.9,
@@ -16817,7 +16827,7 @@
 		},
 		"EnemyCountModifier": {
 			"Mutate": "Multiply",
-			"A": {				
+			"A - Base Enemy Count Modifier": {				
 				"Mutate": "Select",
 				"Select": {
 					"Var": "BaseDifficultySelection"
@@ -16831,7 +16841,7 @@
 						1
 					]
 				},				
-				"Hazard 4": {
+				"Hazard 4x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						1.5,
@@ -16840,7 +16850,7 @@
 						2.7				
 					]
 				},				
-				"Hazard 5": {
+				"Hazard 5x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						1.7,
@@ -16849,7 +16859,7 @@
 						3.0				
 					]
 				},				
-				"Hazard 6": {
+				"Hazard 6x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						1.9,
@@ -16858,7 +16868,7 @@
 						3.3				
 					]
 				},				
-				"Hazard 7": {
+				"Hazard 7x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						2.3,
@@ -16867,7 +16877,7 @@
 						3.5				
 					]
 				},
-				"Hazard 8": {
+				"Hazard 8x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						2.7,
@@ -16876,7 +16886,7 @@
 						3.7				
 					]
 				},				
-				"Hazard 9": {
+				"Hazard 9x2": {
 					"Mutate": "ByPlayerCount",
 					"Values": [
 						2.9,
@@ -16886,7 +16896,7 @@
 					]
 				}				
 			},
-			"B": {
+			"B - Evolution Multiplier": {
 				"Mutate": "Select",
 				"Select": {
 					"Var": "Evolution_Switch"
@@ -16894,11 +16904,53 @@
 				"Default": 1,
 				"On": 1.5
 			},
-			"C": {
+			"C - Sandblasted Multiplier": {
 				"Mutate": "ByBiome",
 				"Default": 1,
 				"SandblastedCorridors": 0.75
-			}
+			},
+			"D - Eggs and Drillevator": {
+				"Mutate": "If",
+				"Condition": {
+					"Mutate": "Or",
+					"A": {
+						"Mutate": "DuringEggAmbush",
+						"StartingAt": 5,
+						"StoppingAfter": 10
+					},
+					"B": {
+						"Mutate": "DuringDrillevator",
+						"StartingAt": 5,
+						"StoppingAfter": 300
+					}
+				},
+				"Then": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5
+				},
+				"Else": 1
+			},
+			"E - During Defend": {
+				"Mutate": "If",
+				"Condition": {
+					"Mutate": "DuringDefend",
+					"StartingAt": 5,
+					"StoppingAfter": 180
+				},
+				"Then": {
+					"Mutate": "Select",
+					"Select": {
+						"Var": "Evolution_Switch"
+					},
+					"Default": 1,
+					"On": 1.5					
+				},
+				"Else": 1
+			}		
 		},	
 		"EncounterDifficulty": [
 			{
@@ -16909,12 +16961,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 0,
-					"Hazard 4": 350,
-					"Hazard 5": 450,
-					"Hazard 6": 550,
-					"Hazard 7": 550,
-					"Hazard 8": 650,
-					"Hazard 9": 650
+					"Hazard 4x2": 350,
+					"Hazard 5x2": 450,
+					"Hazard 6x2": 550,
+					"Hazard 7x2": 550,
+					"Hazard 8x2": 650,
+					"Hazard 9x2": 650
 				},
 				"max": {
 					"Mutate": "Select",
@@ -16922,12 +16974,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 0,
-					"Hazard 4": 450,
-					"Hazard 5": 550,
-					"Hazard 6": 650,
-					"Hazard 7": 700,
-					"Hazard 8": 700,
-					"Hazard 9": 750
+					"Hazard 4x2": 450,
+					"Hazard 5x2": 550,
+					"Hazard 6x2": 650,
+					"Hazard 7x2": 700,
+					"Hazard 8x2": 700,
+					"Hazard 9x2": 750
 				}
 			},
 			{
@@ -16938,12 +16990,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 0,
-					"Hazard 4": 250,
-					"Hazard 5": 350,
-					"Hazard 6": 450,
-					"Hazard 7": 550,
-					"Hazard 8": 550,
-					"Hazard 9": 650
+					"Hazard 4x2": 250,
+					"Hazard 5x2": 350,
+					"Hazard 6x2": 450,
+					"Hazard 7x2": 550,
+					"Hazard 8x2": 550,
+					"Hazard 9x2": 650
 				},
 				"max": {
 					"Mutate": "Select",
@@ -16951,12 +17003,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 400,
-					"Hazard 4": 450,
-					"Hazard 5": 550,
-					"Hazard 6": 750,
-					"Hazard 7": 750,
-					"Hazard 8": 850,
-					"Hazard 9": 850
+					"Hazard 4x2": 450,
+					"Hazard 5x2": 550,
+					"Hazard 6x2": 750,
+					"Hazard 7x2": 750,
+					"Hazard 8x2": 850,
+					"Hazard 9x2": 850
 				}
 			},
 			{
@@ -16967,12 +17019,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 1,
-					"Hazard 4": 350,
-					"Hazard 5": 450,
-					"Hazard 6": 550,
-					"Hazard 7": 650,
-					"Hazard 8": 650,
-					"Hazard 9": 750
+					"Hazard 4x2": 350,
+					"Hazard 5x2": 450,
+					"Hazard 6x2": 550,
+					"Hazard 7x2": 650,
+					"Hazard 8x2": 650,
+					"Hazard 9x2": 750
 				},
 				"max": {
 					"Mutate": "Select",
@@ -16980,12 +17032,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 1,
-					"Hazard 4": 450,
-					"Hazard 5": 550,
-					"Hazard 6": 650,
-					"Hazard 7": 750,
-					"Hazard 8": 850,
-					"Hazard 9": 950
+					"Hazard 4x2": 450,
+					"Hazard 5x2": 550,
+					"Hazard 6x2": 650,
+					"Hazard 7x2": 750,
+					"Hazard 8x2": 850,
+					"Hazard 9x2": 950
 				}
 			}
 		],
@@ -16999,13 +17051,13 @@
 						"Select": {
 							"Var": "BaseDifficultySelection"
 						},
-						"Default": 1,
-						"Hazard 4": 150,
-						"Hazard 5": 250,
-						"Hazard 6": 350,	
-						"Hazard 7": 450,						
-						"Hazard 8": 550,						
-						"Hazard 9": 650
+						"Default": 200,
+						"Hazard 4x2": 250,
+						"Hazard 5x2": 300,
+						"Hazard 6x2": 350,	
+						"Hazard 7x2": 450,						
+						"Hazard 8x2": 550,						
+						"Hazard 9x2": 650
 					},
 					"Multiplicator": {
 						"Mutate": "ByDNA",
@@ -17021,29 +17073,13 @@
 						"Select": {
 							"Var": "BaseDifficultySelection"
 						},
-						"Default": 1,
-						"Hazard 4": {
-							"Mutate": "ByPlayerCount",
-							"Values": [
-								350,
-								400,
-								475,
-								550
-							]
-						},
-						"Hazard 5": {
-							"Mutate": "ByPlayerCount",
-							"Values": [
-								375,
-								425,
-								500,
-								575
-							]
-						},
-						"Hazard 6": 450,	
-						"Hazard 7": 600,						
-						"Hazard 8": 750,						
-						"Hazard 9": 900
+						"Default": 225,
+						"Hazard 4x2": 300,
+						"Hazard 5x2": 375,
+						"Hazard 6x2": 450,	
+						"Hazard 7x2": 600,						
+						"Hazard 8x2": 750,						
+						"Hazard 9x2": 900
 					},					
 					"Multiplicator": {
 						"Mutate": "ByDNA",
@@ -17063,12 +17099,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 140,
-					"Hazard 4": 130,
-					"Hazard 5": 125,
-					"Hazard 6": 125,
-					"Hazard 7": 120,					
-					"Hazard 8": 120,
-					"Hazard 9": 110
+					"Hazard 4x2": 130,
+					"Hazard 5x2": 125,
+					"Hazard 6x2": 125,
+					"Hazard 7x2": 120,					
+					"Hazard 8x2": 120,
+					"Hazard 9x2": 110
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17076,12 +17112,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 165,
-					"Hazard 4": 210,
-					"Hazard 5": 185,
-					"Hazard 6": 165,
-					"Hazard 7": 150,					
-					"Hazard 8": 130,
-					"Hazard 9": 125
+					"Hazard 4x2": 210,
+					"Hazard 5x2": 185,
+					"Hazard 6x2": 165,
+					"Hazard 7x2": 150,					
+					"Hazard 8x2": 130,
+					"Hazard 9x2": 125
 				}
 			}
 		],
@@ -17094,12 +17130,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 200,
-					"Hazard 4": 190,
-					"Hazard 5": 180,
-					"Hazard 6": 170,
-					"Hazard 7": 160,					
-					"Hazard 8": 150,
-					"Hazard 9": 140
+					"Hazard 4x2": 190,
+					"Hazard 5x2": 180,
+					"Hazard 6x2": 170,
+					"Hazard 7x2": 160,					
+					"Hazard 8x2": 150,
+					"Hazard 9x2": 140
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17107,12 +17143,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 240,
-					"Hazard 4": 230,
-					"Hazard 5": 220,
-					"Hazard 6": 210,
-					"Hazard 7": 200,
-					"Hazard 8": 190,
-					"Hazard 9": 180
+					"Hazard 4x2": 230,
+					"Hazard 5x2": 220,
+					"Hazard 6x2": 210,
+					"Hazard 7x2": 200,
+					"Hazard 8x2": 190,
+					"Hazard 9x2": 180
 				}
 			},
 			{
@@ -17130,12 +17166,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 300,
-					"Hazard 4": 350,
-					"Hazard 5": 450,
-					"Hazard 6": 550,
-					"Hazard 7": 650,					
-					"Hazard 8": 750,
-					"Hazard 9": 850
+					"Hazard 4x2": 350,
+					"Hazard 5x2": 450,
+					"Hazard 6x2": 550,
+					"Hazard 7x2": 650,					
+					"Hazard 8x2": 750,
+					"Hazard 9x2": 850
 				},
 				"max": {
 					"Mutate": "Select",
@@ -17143,12 +17179,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 400,
-					"Hazard 4": 450,
-					"Hazard 5": 550,
-					"Hazard 6": 650,
-					"Hazard 7": 750,					
-					"Hazard 8": 850,
-					"Hazard 9": 950
+					"Hazard 4x2": 450,
+					"Hazard 5x2": 550,
+					"Hazard 6x2": 650,
+					"Hazard 7x2": 750,					
+					"Hazard 8x2": 850,
+					"Hazard 9x2": 950
 				}
 			}
 		],
@@ -17163,10 +17199,12 @@
 							"Var": "BaseDifficultySelection"
 						},
 						"Default": 4,
-						"Hazard 6": 4,
-						"Hazard 7": 5,					
-						"Hazard 8": 6,
-						"Hazard 9": 7
+						"Hazard 4x2": 2,
+						"Hazard 5x2": 3,
+						"Hazard 6x2": 4,
+						"Hazard 7x2": 5,					
+						"Hazard 8x2": 6,
+						"Hazard 9x2": 7
 					},
 					"B": {
 						"Mutate": "Select",
@@ -17184,11 +17222,13 @@
 						"Select": {
 							"Var": "BaseDifficultySelection"
 						},
-						"Default": 6,
-						"Hazard 6": 5,
-						"Hazard 7": 6,					
-						"Hazard 8": 7,
-						"Hazard 9": 8
+						"Default": 2,
+						"Hazard 4x2": 3,
+						"Hazard 5x2": 4,
+						"Hazard 6x2": 5,
+						"Hazard 7x2": 6,					
+						"Hazard 8x2": 7,
+						"Hazard 9x2": 8
 					},
 					"B": {
 						"Mutate": "Select",
@@ -17209,11 +17249,13 @@
 						"Select": {
 							"Var": "BaseDifficultySelection"
 						},
-						"Default": 7,
-						"Hazard 6": 6,
-						"Hazard 7": 7,					
-						"Hazard 8": 8,
-						"Hazard 9": 9
+						"Default": 3,
+						"Hazard 4x2": 4,
+						"Hazard 5x2": 5,
+						"Hazard 6x2": 6,
+						"Hazard 7x2": 7,					
+						"Hazard 8x2": 8,
+						"Hazard 9x2": 9
 					},
 					"B": {
 						"Mutate": "Select",
@@ -17231,11 +17273,13 @@
 						"Select": {
 							"Var": "BaseDifficultySelection"
 						},
-						"Default": 7,
-						"Hazard 6": 7,
-						"Hazard 7": 8,					
-						"Hazard 8": 9,
-						"Hazard 9": 10
+						"Default": 4,
+						"Hazard 4x2": 5,
+						"Hazard 5x2": 6,
+						"Hazard 6x2": 7,
+						"Hazard 7x2": 8,					
+						"Hazard 8x2": 9,
+						"Hazard 9x2": 10
 					},
 					"B": {
 						"Mutate": "Select",
@@ -17275,12 +17319,12 @@
 				"Var": "BaseDifficultySelection"
 			},
 			"Default": 1,
-			"Hazard 4": 1,
-			"Hazard 5": 1.15,
-			"Hazard 6": 1.25,
-			"Hazard 7": 1.35,
-			"Hazard 8": 1.45,
-			"Hazard 9": 1.55
+			"Hazard 4x2": 1,
+			"Hazard 5x2": 1.15,
+			"Hazard 6x2": 1.25,
+			"Hazard 7x2": 1.35,
+			"Hazard 8x2": 1.45,
+			"Hazard 9x2": 1.55
 		},
 		"AttackCooldownModifier": {
 			"Mutate": "Select",
@@ -17288,12 +17332,12 @@
 				"Var": "BaseDifficultySelection"
 			},
 			"Default": 1,
-			"Hazard 4": 1.25,
-			"Hazard 5": 1.5,
-			"Hazard 6": 1.75,
-			"Hazard 7": 2,
-			"Hazard 8": 2.25,
-			"Hazard 9": 2.5
+			"Hazard 4x2": 1.25,
+			"Hazard 5x2": 1.5,
+			"Hazard 6x2": 1.75,
+			"Hazard 7x2": 2,
+			"Hazard 8x2": 2.25,
+			"Hazard 9x2": 2.5
 		},
 		"ProjectileSpeedModifier": {
 			"Mutate": "Select",
@@ -17301,12 +17345,12 @@
 				"Var": "BaseDifficultySelection"
 			},
 			"Default": 1,
-			"Hazard 4": 1.5,
-			"Hazard 5": 1.7,
-			"Hazard 6": 1.9,
-			"Hazard 7": 2.1,
-			"Hazard 8": 2.3,
-			"Hazard 9": 2.5			
+			"Hazard 4x2": 1.5,
+			"Hazard 5x2": 1.7,
+			"Hazard 6x2": 1.9,
+			"Hazard 7x2": 2.1,
+			"Hazard 8x2": 2.3,
+			"Hazard 9x2": 2.5			
 		},
 		"HealthRegenerationMax": 0.4,
 		"ReviveHealthRatio": 0.4			
@@ -17326,12 +17370,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 80,
-					"Hazard 4": 60,
-					"Hazard 5": 50,
-					"Hazard 6": 40,
-					"Hazard 7": 40,
-					"Hazard 8": 40,
-					"Hazard 9": 0
+					"Hazard 4x2": 40,
+					"Hazard 5x2": 40,
+					"Hazard 6x2": 40,
+					"Hazard 7x2": 40,
+					"Hazard 8x2": 40,
+					"Hazard 9x2": 0
 				},
 				"Else": {
 					"Mutate": "Select",
@@ -17339,12 +17383,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 80,
-					"Hazard 4": 80,
-					"Hazard 5": 70,
-					"Hazard 6": 60,
-					"Hazard 7": 50,
-					"Hazard 8": 40,
-					"Hazard 9": 40
+					"Hazard 4x2": 80,
+					"Hazard 5x2": 70,
+					"Hazard 6x2": 60,
+					"Hazard 7x2": 50,
+					"Hazard 8x2": 40,
+					"Hazard 9x2": 40
 				}
 			},
 			"Salvage": {
@@ -17359,12 +17403,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 80,
-					"Hazard 4": 40,
-					"Hazard 5": 30,
-					"Hazard 6": 20,
-					"Hazard 7": 10,
-					"Hazard 8": 0,
-					"Hazard 9": 0
+					"Hazard 4x2": 40,
+					"Hazard 5x2": 40,
+					"Hazard 6x2": 0,
+					"Hazard 7x2": 0,
+					"Hazard 8x2": 0,
+					"Hazard 9x2": 0
 				},
 				"Else": {
 					"Mutate": "Select",
@@ -17372,12 +17416,12 @@
 						"Var": "BaseDifficultySelection"
 					},
 					"Default": 80,
-					"Hazard 4": 80,
-					"Hazard 5": 70,
-					"Hazard 6": 60,
-					"Hazard 7": 50,
-					"Hazard 8": 40,
-					"Hazard 9": 40
+					"Hazard 4x2": 80,
+					"Hazard 5x2": 70,
+					"Hazard 6x2": 60,
+					"Hazard 7x2": 50,
+					"Hazard 8x2": 40,
+					"Hazard 9x2": 40
 				}
 			}
 		}
@@ -17468,7 +17512,7 @@
 			"Var": "Evolution_Switch"
 		},
 		"Default": 1,
-		"Evo I": {
+		"On": {
 			"Mutate": "ByDNA",
 			"Default": 1.2,
 			"Salvage": 1.3,
@@ -17497,38 +17541,38 @@
 						"Then": {
 							"Mutate": "Select",
 							"Select": {
-								"Var": "BaseDifficultySelection"
-							},
-							"Default": "",
-							"Hazard 4": "|                Base:         Hazard 4x2                                                                                    ",
-							"Hazard 5": "|                Base:         Hazard 5x2                                                                                    ",
-							"Hazard 6": "|                Base:         Hazard 6x2                                                                                    ",
-							"Hazard 7": "|                Base:         Hazard 7x2                                                                                    ",					
-							"Hazard 8": "|                Base:         Hazard 8x2                                                                                    ",
-							"Hazard 9": "|                Base:         Hazard 9x2                                                                                    "
-						},
-						"Else": ""
-					},
-					{
-						"Mutate": "IfFloat",
-						"Value": {
-							"Mutate": "Countdown",
-							"Start": 2,
-							"Stop": 0,
-							"Enable": true
-						},
-						"==": 0,
-						"Then": {
-							"Mutate": "Select",
-							"Select": {
 								"Var": "Evolution_Switch"
 							},
-							"Default": "",
-							"on": "|        Evolution:         on                                                                                            ",
-							"off": "|       Evolution:         off                                                                                     "                                                                                          
+							"Default": "|    !!! Error - Check the Evolution Switch !!!                                                                                             ",
+							"On": {
+								"Mutate": "Select",
+								"Select": {
+									"Var": "BaseDifficultySelection"
+								},
+								"Default": "",
+								"Hazard 4x2": "|        Evolution:         I - The First Cell                                                                                    ",
+								"Hazard 5x2": "|        Evolution:         II - Eukaryotic Dawn                                                                                   ",
+								"Hazard 6x2": "|        Evolution:         III - Multicell Unity                                                                                   ",
+								"Hazard 7x2": "|        Evolution:         IV - Bilateral                                                                                    ",					
+								"Hazard 8x2": "|        Evolution:         V - The Great Divergence                                                                                    ",
+								"Hazard 9x2": "|        Evolution:         VI - Ascendence                                                                                    "
+							},
+							"Off": {
+								"Mutate": "Select",
+								"Select": {
+									"Var": "BaseDifficultySelection"
+								},
+								"Default": "",
+								"Hazard 4x2": "|                Base:         Hazard 4x2                                                                                    ",
+								"Hazard 5x2": "|                Base:         Hazard 5x2                                                                                    ",
+								"Hazard 6x2": "|                Base:         Hazard 6x2                                                                                    ",
+								"Hazard 7x2": "|                Base:         Hazard 7x2                                                                                    ",					
+								"Hazard 8x2": "|                Base:         Hazard 8x2                                                                                    ",
+								"Hazard 9x2": "|                Base:         Hazard 9x2                                                                                    "
+							}
 						},
 						"Else": ""
-					},					
+					},				
 					{
 						"Mutate": "IfFloat",
 						"Value": {
@@ -17607,12 +17651,12 @@
 								"Var": "BaseDifficultySelection"
 							},
 							"Default": 80,
-							"Hazard 4": 60,
-							"Hazard 5": 50,
-							"Hazard 6": 40,
-							"Hazard 7": 40,
-							"Hazard 8": 40,
-							"Hazard 9": 0
+							"Hazard 4x2": 60,
+							"Hazard 5x2": 50,
+							"Hazard 6x2": 40,
+							"Hazard 7x2": 40,
+							"Hazard 8x2": 40,
+							"Hazard 9x2": 0
 						},
 						"Salvage": {
 							"Mutate": "Select",
@@ -17620,12 +17664,12 @@
 								"Var": "BaseDifficultySelection"
 							},
 							"Default": 80,
-							"Hazard 4": 40,
-							"Hazard 5": 30,
-							"Hazard 6": 20,
-							"Hazard 7": 10,
-							"Hazard 8": 0,
-							"Hazard 9": 0
+							"Hazard 4x2": 40,
+							"Hazard 5x2": 30,
+							"Hazard 6x2": 20,
+							"Hazard 7x2": 10,
+							"Hazard 8x2": 0,
+							"Hazard 9x2": 0
 						}
 					},					
 					"Then": true,
@@ -17645,12 +17689,12 @@
 								"Var": "BaseDifficultySelection"
 							},
 							"Default": 80,
-							"Hazard 4": 80,
-							"Hazard 5": 70,
-							"Hazard 6": 60,
-							"Hazard 7": 50,
-							"Hazard 8": 40,
-							"Hazard 9": 40
+							"Hazard 4x2": 80,
+							"Hazard 5x2": 70,
+							"Hazard 6x2": 60,
+							"Hazard 7x2": 50,
+							"Hazard 8x2": 40,
+							"Hazard 9x2": 40
 						},
 						"Salvage": {
 							"Mutate": "Select",
@@ -17658,12 +17702,12 @@
 								"Var": "BaseDifficultySelection"
 							},
 							"Default": 80,
-							"Hazard 4": 80,
-							"Hazard 5": 70,
-							"Hazard 6": 60,
-							"Hazard 7": 50,
-							"Hazard 8": 40,
-							"Hazard 9": 40
+							"Hazard 4x2": 80,
+							"Hazard 5x2": 70,
+							"Hazard 6x2": 60,
+							"Hazard 7x2": 50,
+							"Hazard 8x2": 40,
+							"Hazard 9x2": 40
 						}
 					},					
 					"Then": true,

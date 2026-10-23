@@ -41,3 +41,7 @@ Update [149]:
 Update [150]:
 
 - added a switch for Evolution
+- decreased spawns in Sandblasted Corridors by 25%
+- removed bigger Waves from egg, uplink, refuel and drillevator Events (Scaled Versions only)
+- decreased bug resistance by 15% (Evo only)
+- added Sprout variants [Electric, Fire, Ice, Laser & Rock] (pak)

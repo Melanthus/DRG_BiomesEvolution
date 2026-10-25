@@ -5,7 +5,7 @@
 	|                                                                                            |
 	|                                A Biome Specific Difficulty                                 |
 	|                                        By Xanthus                                          |
-	|                                     - Version b150 -                                       |
+	|                                     - Version b151 -                                       |
 	|____________________________________________________________________________________________|
 	|                                                                                            |
 	|                                Weapon Damage Scaling [%]:                                  |
@@ -3775,7 +3775,7 @@
 
 		"ED_BarrageInfector": {
 			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 145,
+			"DifficultyRating": 220,
 			"Materials": {
 				"Mutate": "ByBiome",
 				"Default": [],
@@ -3845,17 +3845,8 @@
 			"SpawnAmountModifier": 0.5
 		},
 		"ED_Biomes_BarrageInfector_Fire": {
-			"Base": "ED_BarrageInfector",
 			"CanBeUsedInEncounters": true,
 			"DifficultyRating": 220,
-			"DisplayName": "Fireball Infector",
-			"Materials": [
-				"M_Spider_Tank_Rock_A",
-				"M_RivalBomb_ImpactBubbleRed",
-				"M_RivalBomb_ImpactBubbleRed",
-				"M_RivalBomb_ImpactBubbleRed"
-			],
-			"Projectile": "PRJ_Biomes_BarrageInfector_Fire",
 			"Resistances": {
 				"ColdDamageMultiplier": {
 					"Var": "Resistance_Cold"
@@ -3988,7 +3979,7 @@
 			"AttackDamageMultiplier": 0.5,
 			"Base": "ED_BarrageInfector",
 			"CanBeUsedInEncounters": true,
-			"DifficultyRating": 250,
+			"DifficultyRating": 220,
 			"DisplayName": "Nukeblast Infector",
 			"Materials": [
 				"M_Spider_Grunt_Armor_Radioactive",
@@ -3996,7 +3987,6 @@
 				"M_DropPod_RampLightsNotBlinking",
 				"M_DropPod_RampLightsNotBlinking"
 			],
-			"MaxSpawnCount": 2,
 			"Projectile": "PRJ_Nukebomber_Bomb",
 			"Resistances": {
 				"ColdDamageMultiplier": {
@@ -4032,6 +4022,44 @@
 			},
 			"TimeDilation": 0.3
 		},
+		"ED_Biomes_BarrageInfector_Skull": {
+			"CanBeUsedInEncounters": true,
+			"DifficultyRating": 220,
+			"Resistances": {
+				"ColdDamageMultiplier": {
+					"Var": "Resistance_Cold"
+				},
+				"CorrosiveDamageMultiplier": {
+					"Var": "Resistance_Corrosive"
+				},
+				"ElectricDamageMultiplier": {
+					"Var": "Resistance_Electric"
+				},
+				"ExplosionDamageMultiplier": {
+					"Var": "Resistance_Explosion"
+				},
+				"FireDamageMultiplier": {
+					"Var": "Resistance_Fire"
+				},
+				"KineticDamageMultiplier": {
+					"Var": "Resistance_Kinetic"
+				},
+				"PhysicalDamageMultiplier": {
+					"Var": "Resistance_Physical"
+				},
+				"PiercingDamageMultiplier": {
+					"Var": "Resistance_Piercing"
+				},
+				"PoisonDamageMultiplier": {
+					"Var": "Resistance_Poison"
+				},
+				"RadiationDamageMultiplier": {
+					"Var": "Resistance_Radiation"
+				}
+			},
+			"SpawnAmountModifier": 0.5,
+			"TimeDilation": 0.3
+		},		
 		
 		"ED_Bomber": {
 			"CanBeUsedInEncounters": true,
@@ -6828,20 +6856,20 @@
 			},
 			"Temperature": {
 				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
+					"Var": "Temperature_Scale_Special"
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
 					"Default": 30,
 					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
+						"Var": "Temperature_Burn_Special"
 					}
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
 					"Default": -50,
 					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
+						"Var": "Temperature_Freeze_Special"
 					}
 				},
 				"DieIfBurning": {
@@ -6960,20 +6988,20 @@
 			},
 			"Temperature": {
 				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
+					"Var": "Temperature_Scale_Special"
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
 					"Default": 30,
 					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
+						"Var": "Temperature_Burn_Special"
 					}
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
 					"Default": -50,
 					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
+						"Var": "Temperature_Freeze_Special"
 					}
 				},
 				"DieIfBurning": {
@@ -7030,20 +7058,20 @@
 			"SpawnAmountModifier": 0.1,
 			"Temperature": {
 				"TemperatureChangeScale": {
-					"Var": "Temperature_Scale_Normal"
+					"Var": "Temperature_Scale_Special"
 				},
 				"BurnTemperature": {
 					"Mutate": "ByBiome",
 					"Default": 30,
 					"MagmaCaves": {
-						"Var": "Temperature_Burn_Normal"
+						"Var": "Temperature_Burn_Special"
 					}
 				},				
 				"FreezeTemperature": {
 					"Mutate": "ByBiome",
 					"Default": -50,
 					"IceCaves": {					
-						"Var": "Temperature_Freeze_Normal"
+						"Var": "Temperature_Freeze_Special"
 					}
 				},
 				"DieIfBurning": {
@@ -14621,11 +14649,7 @@
 			"AttackDamageMultiplier": {
 				"Mutate": "ByBiome",
 				"Default": 1,
-				"AzureWeald": 0.333,
-				"CrystalCaves": 5,
-				"DenseBiozone": 5,
-				"IceCaves": 5,
-				"MagmaCaves": 0.5
+				"AzureWeald": 0.333
 			},
 			"Base": "ED_Sprout_Normal",
 			"CanBeUsedInEncounters": true,
@@ -14747,11 +14771,7 @@
 			"AttackDamageMultiplier": {
 				"Mutate": "ByBiome",
 				"Default": 1,
-				"AzureWeald": 0.333,
-				"CrystalCaves": 5,
-				"DenseBiozone": 5,
-				"IceCaves": 5,
-				"MagmaCaves": 0.5
+				"AzureWeald": 0.333
 			},
 			"Base": "ED_Sprout_Normal",
 			"CanBeUsedInEncounters": true,
@@ -14863,11 +14883,7 @@
 			"AttackDamageMultiplier": {
 				"Mutate": "ByBiome",
 				"Default": 1,
-				"AzureWeald": 0.333,
-				"CrystalCaves": 5,
-				"DenseBiozone": 5,
-				"IceCaves": 5,
-				"MagmaCaves": 0.5
+				"AzureWeald": 0.333
 			},
 			"Base": "ED_Sprout_upside",
 			"CanBeUsedInEncounters": true,
@@ -17552,7 +17568,7 @@
 								"Default": "",
 								"Hazard 4x2": "|        Evolution:         I - The First Cell                                                                                    ",
 								"Hazard 5x2": "|        Evolution:         II - Eukaryotic Dawn                                                                                   ",
-								"Hazard 6x2": "|        Evolution:         III - Multicell Unity                                                                                   ",
+								"Hazard 6x2": "|        Evolution:         III - Multicellular                                                                                   ",
 								"Hazard 7x2": "|        Evolution:         IV - Bilateral                                                                                    ",					
 								"Hazard 8x2": "|        Evolution:         V - The Great Divergence                                                                                    ",
 								"Hazard 9x2": "|        Evolution:         VI - Ascendence                                                                                    "

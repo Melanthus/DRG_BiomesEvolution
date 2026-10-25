@@ -1,0 +1,21 @@
+Update [147]:
+
+- added Fire Bramble
+
+Update [148]:
+
+- added new Magical Bombers
+
+Update [149]:
+
+- added new Ice Bramble in Glacial Strata
+- added new Laser Bramble in REZ
+- added new Slime Bulks in Fungus Bungus
+
+Update [150]:
+
+- added Sprout variants [Electric, Fire, Ice, Laser & Rock]
+
+Update [151]:
+
+- added Skull Barrage Infector

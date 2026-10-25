@@ -1,4 +1,4 @@
-Update_145: 
+Update [145]: 
 
 - lowered Difficulty of Extra Waves from 150 to 125
 - lowered initial time for Extra Waves to occur (~ a quarter of the time before)
@@ -9,14 +9,14 @@ Update_145:
 - adjusted Messages
 - added evolved opressors (Evo series)
 
-Update_146:
+Update [146]:
 
 - lowered distance of Phantom kill switch
 
 Update [147]:
 
 - lowered swarmer spawns by half (Evo only)
-- added Fire Bramble in Magma Caves (pak)
+- added Fire Bramble in Magma Caves
 - added Woodlouse variant for Azure Weald
 - added Arbalest variant for Azure Weald
 - lowered the damage done by vanilla Fire Bombers
@@ -25,13 +25,13 @@ Update [147]:
 
 Update [148]:
 
-- added new Magical Bombers in Azure Weald (pak)
+- added new Magical Bombers in Azure Weald
 
 Update [149]:
 
-- added new Ice Bramble in Glacial Strata (pak)
-- added new Laser Bramble in REZ (pak)
-- added new Slime Bulks in Fungus Bungus (pak)
+- added new Ice Bramble in Glacial Strata
+- added new Laser Bramble in REZ
+- added new Slime Bulks in Fungus Bungus
 - introduced temperature system for Grabbers in Magma and Ice biome
 - adjusted temperature System for Glacial Strata
 - upped the nitra ocurrence by (10/10/15)% (Evo only)
@@ -44,4 +44,8 @@ Update [150]:
 - decreased spawns in Sandblasted Corridors by 25%
 - removed bigger Waves from egg, uplink, refuel and drillevator Events (Scaled Versions only)
 - decreased bug resistance by 15% (Evo only)
-- added Sprout variants [Electric, Fire, Ice, Laser & Rock] (pak)
+- added new Sprout variants [Electric, Fire, Ice, Laser & Rock]
+
+Update [151]:
+
+- added new Skull Barrage Infector in Fungus

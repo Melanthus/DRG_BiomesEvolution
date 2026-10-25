@@ -28,6 +28,9 @@ Bomber:
 	ED_Biomes_Bomber_Fire
 	ED_Biomes_Bomber_Void
 
+Bulk Detonator:
+	ED_Biomes_Spider_ExploderTank_Slime		[WIP]
+
 Menace:
 	ED_Biomes_Spider_RapidShooter_Electric
 	ED_Biomes_Spider_RapidShooter_Fire
@@ -42,7 +45,20 @@ Shellback:
 	ED_Biomes_Woodlouse_Poison			[WIP]
 	ED_Biomes_Woodlouse_Void			[WIP]
 
+Warden:
+	ED_Biomes_Spider_Buffer_Fire			[WIP]
+
+Korlok:
+	ED_Biomes_Sprout_Electric			[WIP]
+	ED_Biomes_Sprout_Fire				[WIP]
+	ED_Biomes_Sprout_Ice				[WIP]
+	ED_Biomes_Sprout_Laser				[WIP]
+	ED_Biomes_Sprout_Rock				[WIP]
+
 Barrage Infector:
+
+	ED_Biomes_BarrageInfector_Fire
+	ED_Biomes_BarrageInfector_Skull
 
 Spitballer:
 	ED_Biomes_ShootingPlant_Electric
@@ -106,6 +122,7 @@ Korlok:
 
 Barrage Infector:
 	PRJ_Biomes_BarrageInfector_Fire
+	PRJ_Biomes_BarrageInfector_Skull
 
 Spitballer:
 	PRJ_Biomes_ShootingPlant_Electric

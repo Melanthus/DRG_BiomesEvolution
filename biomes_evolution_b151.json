@@ -60,7 +60,7 @@
 	|                      |  - bigger swarms during defend (uplink/refuel), eggs and            |
 	|                      |    drillevator                                                      |
 	|                      |  - grunts on steroids                                               |
-	|                      |                                                                     |
+	|                      |  - Enemies have 15% less health                                     |
 	|                      |                                                                     |
 	|______________________|_____________________________________________________________________|
 	|                                                                                            |
@@ -1815,7 +1815,7 @@
 							}							
 						],
 						"FungusBogs": [
-							"ED_BarrageInfector",
+							"ED_Biomes_BarrageInfector_Skull",
 							"ED_CaveLeech",
 							"ED_CaveLeech_Big",
 							"ED_JellyBreeder_InfestationLarva",

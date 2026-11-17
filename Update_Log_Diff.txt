@@ -49,3 +49,8 @@ Update [150]:
 Update [151]:
 
 - added new Skull Barrage Infector in Fungus
+
+Update [152]:
+
+- added Features to Slime Bulks
+- added new Electric Praets in Crystal Caves/Dense Biozone

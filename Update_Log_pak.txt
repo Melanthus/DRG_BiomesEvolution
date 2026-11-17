@@ -19,3 +19,8 @@ Update [150]:
 Update [151]:
 
 - added Skull Barrage Infector
+
+Update [151]:
+
+- added Electric Praetorian
+- added slime Explosion to Bulk Slime-o-nator

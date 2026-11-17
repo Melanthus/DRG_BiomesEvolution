@@ -28,8 +28,12 @@ Bomber:
 	ED_Biomes_Bomber_Fire
 	ED_Biomes_Bomber_Void
 
+Praetorian:
+	ED_Biomes_Spider_Tank_Electric
+
 Bulk Detonator:
-	ED_Biomes_Spider_ExploderTank_Slime		[WIP]
+	ED_Biomes_Spider_ExploderTank_Slime		
+	ED_Biomes_Spider_ExploderTank_Mother		[WIP]
 
 Menace:
 	ED_Biomes_Spider_RapidShooter_Electric
@@ -49,11 +53,11 @@ Warden:
 	ED_Biomes_Spider_Buffer_Fire			[WIP]
 
 Korlok:
-	ED_Biomes_Sprout_Electric			[WIP]
-	ED_Biomes_Sprout_Fire				[WIP]
-	ED_Biomes_Sprout_Ice				[WIP]
-	ED_Biomes_Sprout_Laser				[WIP]
-	ED_Biomes_Sprout_Rock				[WIP]
+	ED_Biomes_Sprout_Electric			
+	ED_Biomes_Sprout_Fire				
+	ED_Biomes_Sprout_Ice				
+	ED_Biomes_Sprout_Laser				
+	ED_Biomes_Sprout_Rock				
 
 Barrage Infector:
 
